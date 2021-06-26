@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Entity\Category;
 use App\Form\CategoryType;
@@ -12,14 +12,14 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  *
  * Class AdminController
- * @package App\Controller
+ * @package App\Controller\Admin
  */
 
 class AdminController extends AbstractController
 {
     /**
      * @return Response
-     *  @Route("/admin", name="admin_home")
+     * @Route("/admin", name="admin_home")
      */
     public function index(): Response
     {

@@ -3,8 +3,11 @@
 namespace App\Entity;
 
 use App\Repository\ServiceRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+
 
 
 /**
@@ -24,11 +27,12 @@ class Service
      */
     private $title;
 
+        //@ORM\Column(type="string", length=255,nullable=true)
     /**
-     * Gedmo\slug(fields={"title"})
-     * @ORM\Column(type="string", length=255,nullable=true)
+     * @Gedmo\Slug(fields={"title"})
+     * @ORM\Column(type="string", length=255)
      */
-    private ?string $slug;
+    private ?string $slug ;
 
     /**
      * @ORM\Column(type="text")
@@ -39,24 +43,40 @@ class Service
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime")
      */
-    private $created_at;
+    public  $created_at;
 
     /**
      * @ORM\Column(type="boolean")
+     * @ORM\JoinColumn(nullable=true)
      */
-    private $active;
+    private ?bool $active=true;
+
+    //ici@ORM\JoinColumn(nullable=true)
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="services",cascade={"persist","remove"})
+     */
+    private ?User $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="services")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity=Category::class,inversedBy="services",cascade={"persist","remove"})
      */
-    private $user;
+    private ?Category $category;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="services")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\OneToMany(targetEntity=Image::class, mappedBy="service", orphanRemoval=true,cascade={"persist"})
      */
-    private $category;
+    private $images;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=User::class, inversedBy="favoris")
+     */
+    private $favoris;
+
+    public function __construct()
+    {
+        $this->images = new ArrayCollection();
+        $this->favoris = new ArrayCollection();
+    }
 
 
     public function getId(): ?int
@@ -94,7 +114,7 @@ class Service
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
+    public function getCreatedAt(): ?\datetime
     {
         return $this->created_at;
     }
@@ -132,6 +152,60 @@ class Service
     public function setCategory(?Category $category): self
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Image[]
+     */
+    public function getImages(): Collection
+    {
+        return $this->images;
+    }
+
+    public function addImage(Image $image): self
+    {
+        if (!$this->images->contains($image)) {
+            $this->images[] = $image;
+            $image->setService($this);
+        }
+
+        return $this;
+    }
+
+    public function removeImage(Image $image): self
+    {
+        if ($this->images->removeElement($image)) {
+            // set the owning side to null (unless already changed)
+            if ($image->getService() === $this) {
+                $image->setService(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getFavoris(): Collection
+    {
+        return $this->favoris;
+    }
+
+    public function addFavori(User $favori): self
+    {
+        if (!$this->favoris->contains($favori)) {
+            $this->favoris[] = $favori;
+        }
+
+        return $this;
+    }
+
+    public function removeFavori(User $favori): self
+    {
+        $this->favoris->removeElement($favori);
 
         return $this;
     }

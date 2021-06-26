@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ service.title}}{% endblock %}
+
+{% block body %}
+    <article>
+        <div class="contentimage card-columns">
+            <img src="{{asset('uploads/'~service.images[0].name) }}" alt="{{ service.title}}" width="300x400">
+            {# inserer carousel puisqu' il y ' a plusieurs images uploader#}
+            <div class="card-header">{{service.title}}</div>
+            <div class="card-content">
+                {# <p> Activité:{{service.category }}</p>>#}
+                <p>{{service.content|raw}}</p>
+            </div>
+        </div>
+    </article>
+{% endblock %}

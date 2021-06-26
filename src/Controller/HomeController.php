@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\ServiceRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -9,13 +10,14 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends AbstractController
 {
     /**
-     * @return Response
      * @Route("/", name="app_home")
+     * @param ServiceRepository $serviceRepository
+     * @return Response
      */
-    public function index(): Response
+    public function index( ServiceRepository $serviceRepository): Response
     {
         return $this->render('home/index.html.twig', [
-            'controller_name' => 'HomeController',
+            'services' => $serviceRepository->findBy(['active'=>true],['created_at'=>'desc'])
         ]);
     }
 }
