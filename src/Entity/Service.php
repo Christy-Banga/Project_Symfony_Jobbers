@@ -57,11 +57,14 @@ class Service
      */
     private ?User $user;
 
+
+    //classe proprietaire de la relation reçoi cascade ={"persist","cascade"}
     /**
      * @ORM\ManyToOne(targetEntity=Category::class,inversedBy="services",cascade={"persist","remove"})
      */
     private ?Category $category;
 
+    //classe non proprietaire de la relation reçoi orphanRemoval=true pour supp les elements orphelins
     /**
      * @ORM\OneToMany(targetEntity=Image::class, mappedBy="service", orphanRemoval=true,cascade={"persist"})
      */
