@@ -55,7 +55,7 @@ class Service
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="services",cascade={"persist","remove"})
      */
-    private ?User $user;
+    private ?User $user=null;
 
     /**
      * @ORM\ManyToOne(targetEntity=Category::class,inversedBy="services",cascade={"persist","remove"})
