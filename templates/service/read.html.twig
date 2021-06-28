@@ -3,15 +3,62 @@
 {% block title %}{{ service.title}}{% endblock %}
 
 {% block body %}
-    <article>
-        <div class="contentimage card-columns">
-            <img src="{{asset('uploads/'~service.images[0].name) }}" alt="{{ service.title}}" width="300x400">
-            {# inserer carousel puisqu' il y ' a plusieurs images uploader#}
-            <div class="card-header">{{service.title}}</div>
-            <div class="card-content">
-                {# <p> Activité:{{service.category }}</p>>#}
-                <p>{{service.content|raw}}</p>
-            </div>
+<div class="form_read">
+<div class="container">
+   
+    
+        <div class="grix xs2 sm3 gutter-0 card">
+            {% for image in service.images %}
+                <div class="primary flex vcenter fx-center">
+                    <img src="{{asset('uploads/' ~ image.name) }}" alt="{{ service.title}}" width="300x400">
+                </div>
+            {% endfor %} 
+                {# inserer carousel puisqu' il y ' a plusieurs images uploader#}
+                <div class="card-header">{{service.title}}</div>
+                <div class="card-content">
+                    {# <p> Activité:{{service.category }}</p>>#}
+                    <p>{{service.content|raw}}</p>
+                </div>
+        </div>  
+      
+
+    
+</div>
+</div><br><br>
+    <div class="grix xs2 sm3 gutter-0 card">
+        <div class="col-xs2 col-sm3" id="ajout-commentaire">
+            <h2>Ajouter un commentaire</h2>
+            {{form(commentForm)}}
         </div>
-    </article>
+        <div class="col-xs2 col-sm3">
+            <h2>Liste des commentaires</h2>
+            {% for comment in service.comments %}
+                {% if comment.parent == null %}
+                <h3>Commentaires {{loop.index}}</h3>
+                    <p><span class="text-muted"> {{comment.createdAt|ago(locale='fr')}} - {{comment.pseudo}} </span></p>
+                    <div>{{comment.content}}</div><br>
+                    <p><a href="#ajout-commentaire" data-reponse data-id="{{comment.id}}" class="btn btn-primary">Répondre</a></p>
+                    <div class="col-md-5">
+                    {# On affiche les réponses des commentaires parents juste en decalage #}
+                    {% for reponse in comment.reponses %}
+                        <p><span class="text-muted"> {{reponse.createdAt|ago(locale='fr')}} - {{reponse.pseudo}} </span></p>
+                        <div>{{reponse.content}}</div><br>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        window.onload = () => {
+        document.querySelectorAll("[data-reponse]").forEach(element => {
+            element.addEventListener("click", function(){
+                document.querySelector("#comments_parentid").value = this.dataset.id;
+            });
+        });
+    }
+    </script>
 {% endblock %}

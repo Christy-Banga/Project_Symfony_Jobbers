@@ -2,10 +2,14 @@
 
 namespace App\Controller;
 
+use App\Entity\Comments;
 use App\Entity\Image;
 use App\Entity\Service;
+use App\Form\CommentsType;
 use App\Form\Service1Type;
 use App\Repository\ServiceRepository;
+use DateTime;
+use DateTimeImmutable;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -169,12 +173,42 @@ class ServiceController extends AbstractController
      * @param ServiceRepository $serviceRepository
      * @return Response
      */
-    public function read($slug, ServiceRepository $serviceRepository): Response
+    public function read($slug, ServiceRepository $serviceRepository, Request $request): Response
     {
         $service = $serviceRepository->findOneBy(['slug' => $slug]);
 
         if (!$service){ throw new NotFoundHttpException('le service souhaite  n\'exite pas');}
 
-        return $this->render('service/read.html.twig',['service'=>$service]);
+        //Commentaire
+        $comment = new Comments;
+
+        $commentForm = $this->createForm(CommentsType::class, $comment);
+
+        $commentForm->handleRequest($request);
+
+        if($commentForm->isSubmitted() && $commentForm->isValid()){
+            $comment->setCreatedAt(new DateTimeImmutable());
+            $comment->setService($service);
+
+            //On récupère le contenu du commentaire parent
+            $parentid = $commentForm->get("parentid")->getData();
+
+            $em = $this->getDoctrine()->getManager();
+
+            $parent = $em->getRepository(Comments::class)->find($parentid);
+
+            $comment->setParent($parent);
+            
+            $em->persist($comment);
+            $em->flush();
+
+            $this->addFlash('message', 'Votre commentaire a bien été envoyé');
+            return $this->redirectToRoute('service-read',['slug' => $service->getSlug()]);
+        }
+
+        return $this->render('service/read.html.twig',[
+            'service'=>$service,
+            'commentForm' => $commentForm->createView()
+        ]);
     }
 }
