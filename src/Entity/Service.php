@@ -12,6 +12,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass=ServiceRepository::class)
+ * @ORM\Table(name="service", indexes={@ORM\Index(columns={"title","content"}, flags={"fulltext"})})
  */
 class Service
 {
@@ -55,7 +56,7 @@ class Service
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="services",cascade={"persist","remove"})
      */
-    private ?User $user;
+    private ?User $user=null;
 
 
     //classe proprietaire de la relation reçoi cascade ={"persist","cascade"}
@@ -75,10 +76,16 @@ class Service
      */
     private $favoris;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Comments::class, mappedBy="service", orphanRemoval=true)
+     */
+    private $comments;
+
     public function __construct()
     {
         $this->images = new ArrayCollection();
         $this->favoris = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
 
@@ -209,6 +216,36 @@ class Service
     public function removeFavori(User $favori): self
     {
         $this->favoris->removeElement($favori);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Comments[]
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comments $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+            $comment->setService($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comments $comment): self
+    {
+        if ($this->comments->removeElement($comment)) {
+            // set the owning side to null (unless already changed)
+            if ($comment->getService() === $this) {
+                $comment->setService(null);
+            }
+        }
 
         return $this;
     }

@@ -4,20 +4,27 @@
 
 {% block body %}
     <div class="container">
-        {% for service in services %}
-            <div class="card shadow-1 fx-row">
-                <div class="primary d-flex vcenter fx-center px-4">
-                    <a href="{{ path('service-read',{slug: service.slug}) }}"> <img src="{{asset('uploads/'~service.images[0].name) }}" alt="{{ service.title}}" width="400X400"></a>
-                </div>
-                <div class="flex fx-col fx-grow">
-                    <div class="card-header"><a href="{{ path('service-read',{slug: service.slug}) }}"> {{service.title}}</a></div>
-                    <div class="card-content">
-                        {# <p> Activité:{{service.category }}</p>>#}
-                        <p>{{service.content|striptags|u.truncate(70,'...') }}</p>
+        <div class="form_index">
+            {{form(form)}}
+            <br>
+            {% for service in services %}
+                <div class="card shadow-1 fx-row">
+                    <div class="primary d-flex vcenter fx-center px-4">
+                        <a href="{{ path('service-read',{slug: service.slug}) }}"> <img src="{{asset('uploads/'~service.images[0].name) }}" alt="{{ service.title}}" width="400X400"></a>
+                    </div>
+                    <div class="flex fx-col fx-grow">
+                        <div class="card-header">Categorie:<a href="{{ path('service-read',{slug: service.slug}) }}"> {{service.title}}</a></div>
+                        <div class="card-content">
+                            {# <p> Activité:{{service.category }}</p>>#}
+                            <p>{{service.content|striptags|u.truncate(70,'...') }}</p>
 
+                        </div>
                     </div>
                 </div>
-            </div>
-        {% endfor %}
+            {% endfor %}
+        </div><br>
+        <div class="pagination justify-content-center">
+            {{knp_pagination_render(services)}}
+        </div>
     </div>
 {% endblock %}

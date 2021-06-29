@@ -31,14 +31,26 @@ class RegistrationFormType extends AbstractType
                 ],
             ])
             ->add('plainPassword', RepeatedType::class ,
-                ["type"=>PasswordType::class,
+                [
+                    "type"=>PasswordType::class,
                     "mapped"=>false,
-                    "first_options"=>["label"=>"mot de passe:"],
-                    "second_options"=>["label"=>"Confirmez votre mot de passe:"],
+                    "first_options"=>[
+                        "label"=>"mot de passe:",
+                        "attr" => [
+                            'class' => 'form-control mb-3',
+                        ]
+                    ],
+                    "second_options"=>[
+                        "label"=>"Confirmez votre mot de passe:",
+                        "attr" => [
+                            'class' => 'form-control mb-3',
+                        ]
+                    ],
                     'invalid_message'=>'la confirmation n \' est pas similaire au mot de passe.',
                     'constraints'=>[new NotBlank(['message' =>'enter le mot de passe',]),
                         new Length(["min"=>6,'minMessage'=>'Votre mot de passe doit être au moins {{ limit }} caractères',
-                            'max'=>4096])  ]]);
+                            'max'=>4096])  ]
+                ]);
 
     }
 
