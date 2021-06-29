@@ -1,0 +1,54 @@
+{% extends 'message.html.twig' %}
+
+{% block title %} Messagerie{% endblock %}
+
+{% block body %}
+    <section class="container">
+        <div class="row">
+            <div class="col">
+                <h1>Messagerie</h1>
+                <p>Envoyé un message </p>
+
+                {# {{ form(form) }} #}
+
+                {{ form_start(form)}}
+                {{ form_row(form.title)}}
+                {{ form_row(form.message)}}
+                {{ form_row(form.recepient)}}
+
+                {{ form_end(form)}}
+
+                <a class="btn btn-primary" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+                    Menu principal
+                </a>
+
+            </div>
+        </div>
+
+    </section>
+
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+        <div class="offcanvas-header">
+            <h2 class="offcanvas-title" id="offcanvasExampleLabel"></h2>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="list-group">
+                <a href="{{ path('app_message') }}" class="list-group-item list-group-item active">
+                    Acceuil</a>
+            </div>
+
+            <div class="list-group">
+                <a href="{{ path('app_received') }}" class="list-group-item list-group-item ">
+                    Boite de récepetion </a>
+            </div>
+
+            <div class="list-group">
+                <a href="{{ path('app_messageSent') }}" class="list-group-item list-group-item ">
+                    Messages envoyés </a>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}
