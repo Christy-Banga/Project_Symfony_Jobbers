@@ -43,7 +43,7 @@ class RegistrationFormType extends AbstractType
                     "second_options"=>[
                         "label"=>"Confirmez votre mot de passe:",
                         "attr" => [
-                            'class' => 'form-control',
+                            'class' => 'form-control mb-3',
                         ]
                     ],
                     'invalid_message'=>'la confirmation n \' est pas similaire au mot de passe.',
