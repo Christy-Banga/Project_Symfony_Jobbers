@@ -1,9 +1,8 @@
-{% extends 'base.html.twig' %}
+{% extends 'user.html.twig' %}
 
 {% block title %}{{ service.title}}{% endblock %}
 
 {% block body %}
-<<<<<<< HEAD
     <article>
         <div class="contentimage card-columns">
             <img src="{{asset('uploads/'~service.images[0].name) }}" alt="{{ service.title}}" width="300x400">
@@ -36,29 +35,8 @@
 
                 {% endif %}
             </div>
-=======
-<div class="form_read">
-<div class="container">
-   
-    
-        <div class="grix xs2 sm3 gutter-0 card">
-            {% for image in service.images %}
-                <div class="primary flex vcenter fx-center">
-                    <img src="{{asset('uploads/' ~ image.name) }}" alt="{{ service.title}}" width="300x400">
-                </div>
-            {% endfor %} 
-                {# inserer carousel puisqu' il y ' a plusieurs images uploader#}
-                <div class="card-header">{{service.title}}</div>
-                <div class="card-content">
-                    {# <p> Activité:{{service.category }}</p>>#}
-                    <p>{{service.content|raw}}</p>
-                </div>
-        </div>  
-      
-
-    
-</div>
-</div><br><br>
+            
+{# Commentaire #}
     <div class="grix xs2 sm3 gutter-0 card">
         <div class="col-xs2 col-sm3" id="ajout-commentaire">
             <h2>Ajouter un commentaire</h2>
@@ -81,7 +59,6 @@
                 </div>
                 {% endif %}
             {% endfor %}
->>>>>>> 4896607f408025eae35ccf52736a03a6f7d4e7ff
         </div>
     </div>
 {% endblock %}

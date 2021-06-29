@@ -25,14 +25,21 @@
 <header>
     <nav class="navbar shadow-1 primary">
         <a href="{{path('app_home') }}" class="navbar-brand">OpenJobs</a>
+        <div class="ml-5">
+            <a href="{{ path('app_home') }}">Accueil </a>
+        </div>
         <div class="navbar-menu ml-auto">
-            <a class="navbar-link" href="{{ path('app_home') }}">Accueil </a>
-            <a class="navbar-link" href="{{ path('app_logout') }}">Se déconnecter</a>
-
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <a class="navbar-link" href="{{ path('app_logout') }}">Se déconnecter</a>
+            {% else %}
+                <a class="navbar-link" href="{{ path('app_login') }}">Se connecter</a>
+                <a class="navbar-link" href="{{ path('app_register') }}">Créer un compte</a>
+            {% endif %}
         </div>
     </nav>
 </header>
 
+{% if is_granted('IS_AUTHENTICATED_FULLY') %}
 <div id="example-sidenav" data-ax="sidenav" class="sidenav shadow-1 large fixed white">
     <div class="sidenav-header">
         <button data-target="example-sidenav" class="sidenav-trigger"><i class="fas fa-times"></i></button>
@@ -63,12 +70,14 @@
     </a>
 
 </div>
+{% endif %}
 <main>
-
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
     <button data-target="example-sidenav"
             class="btn rounded-1 press amaranth dark-1 sidenav-trigger hide-md-up">
         Open sidenav
     </button>
+    {% endif %}
     {% block body %}{% endblock %}
 </main>
 
