@@ -195,9 +195,10 @@ class ServiceController extends AbstractController
 
             $em = $this->getDoctrine()->getManager();
 
-            $parent = $em->getRepository(Comments::class)->find($parentid);
-
-            $comment->setParent($parent);
+            if($parentid != null){
+                $parent = $em->getRepository(Comments::class)->find($parentid);
+            }
+            $comment->setParent($parent ?? null);
             
             $em->persist($comment);
             $em->flush();
