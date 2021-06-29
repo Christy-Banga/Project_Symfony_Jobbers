@@ -19,6 +19,24 @@ class ServiceRepository extends ServiceEntityRepository
         parent::__construct($registry, Service::class);
     }
 
+    /**
+     * Recherche les annonces en fonction du formulaire
+     */
+    public function search($mots = null, $category = null){
+        $query = $this->createQueryBuilder('s');
+        $query->where('s.active = 1');
+        if($mots != null){
+            $query->andWhere('MATCH_AGAINST(s.title, s.content) AGAINST (:mots boolean)>0')
+                ->setParameter('mots', $mots);
+        }
+        if($category != null){
+            $query->leftJoin('s.category', 'c');
+            $query->andWhere('c.id = :id')
+                ->setParameter('id', $category);
+        }
+        return $query->getQuery()->getResult();
+    }
+
     // /**
     //  * @return Service[] Returns an array of Service objects
     //  */

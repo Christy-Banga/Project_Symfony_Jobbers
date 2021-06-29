@@ -27,6 +27,7 @@ class User implements UserInterface
      */
     private $email;
 
+
     /**
      * @ORM\Column(type="json")
      */
@@ -34,9 +35,9 @@ class User implements UserInterface
 
     /**
      * @var string The hashed password
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string",nullable=true)
      */
-    private $password;
+    private ?string $password=null;
 
     /**
      * @ORM\Column(type="boolean")
@@ -44,14 +45,55 @@ class User implements UserInterface
     private $isVerified = false;
 
     /**
-     * @ORM\OneToMany(targetEntity=Service::class, mappedBy="user", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Service::class, mappedBy="user",cascade={"persist","remove"})
      */
     private $services;
 
+    /**
+     * @ORM\Column(type="string", length=100,nullable=true)
+     */
+    private ?string $name;
+
+    /**
+     * @ORM\Column(type="string", length=100,nullable=true)
+     */
+    private ?string $firstname;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Service::class, mappedBy="favoris")
+     */
+    private $favoris;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Message::class, mappedBy="sender", orphanRemoval=true)
+     */
+    private $sent;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Message::class, mappedBy="recepient", orphanRemoval=true)
+     */
+    private $received;
+
+
+    /**
+     * @return mixed
+     */
+    public function __toString()
+    {
+        return $this->email;
+
+    }
     public function __construct()
     {
         $this->services = new ArrayCollection();
+        $this->favoris = new ArrayCollection();
+        $this->sent = new ArrayCollection();
+        $this->received = new ArrayCollection();
     }
+
+
+
+
 
     public function getId(): ?int
     {
@@ -102,16 +144,17 @@ class User implements UserInterface
     /**
      * @see UserInterface
      */
-    public function getPassword(): string
+    public function getPassword(): ?string
     {
         return $this->password;
     }
 
-    public function setPassword(string $password): self
+    public function setPassword(?string $password): self
     {
         $this->password = $password;
-
         return $this;
+
+
     }
 
     /**
@@ -170,6 +213,117 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($service->getUser() === $this) {
                 $service->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function getFirstname(): ?string
+    {
+        return $this->firstname;
+    }
+
+    public function setFirstname(string $firstname): self
+    {
+        $this->firstname = $firstname;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Service[]
+     */
+    public function getFavoris(): Collection
+    {
+        return $this->favoris;
+    }
+
+    public function addFavori(Service $favori): self
+    {
+        if (!$this->favoris->contains($favori)) {
+            $this->favoris[] = $favori;
+            $favori->addFavori($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFavori(Service $favori): self
+    {
+        if ($this->favoris->removeElement($favori)) {
+            $favori->removeFavori($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Message[]
+     */
+    public function getSent(): Collection
+    {
+        return $this->sent;
+    }
+
+    public function addSent(Message $sent): self
+    {
+        if (!$this->sent->contains($sent)) {
+            $this->sent[] = $sent;
+            $sent->setSender($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSent(Message $sent): self
+    {
+        if ($this->sent->removeElement($sent)) {
+            // set the owning side to null (unless already changed)
+            if ($sent->getSender() === $this) {
+                $sent->setSender(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Message[]
+     */
+    public function getReceived(): Collection
+    {
+        return $this->received;
+    }
+
+    public function addReceived(Message $received): self
+    {
+        if (!$this->received->contains($received)) {
+            $this->received[] = $received;
+            $received->setRecepient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReceived(Message $received): self
+    {
+        if ($this->received->removeElement($received)) {
+            // set the owning side to null (unless already changed)
+            if ($received->getRecepient() === $this) {
+                $received->setRecepient(null);
             }
         }
 

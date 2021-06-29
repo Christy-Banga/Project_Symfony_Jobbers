@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gerer les Services{% endblock %}
+
+{% block body %}
+
+    <h1>Gerer les Services </h1>
+
+    {# <a href="{{ path('category_ajout') }}" class="btn shadow-1 rounded-1 blue">Ajout de categories</a> #}
+    <div class="responsive-table">
+        <table class="table striped">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Titre</th>
+                <th>Date</th>
+                <th>Active</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            {% for service in services %}
+            <tbody>
+            <tr>
+                <td>{{ service.id }}</td>
+                <td>{{ service.title}}</td>
+                <td>{{ service.created_at|date}}</td>
+                <td>{{ service.active}}
+                    <label class="form-switch mt-2">
+                        Off
+
+                        <input type="checkbox" {{ (service.active) ? 'checkbox' : ''}} data-id="{{ service.id}}" />
+                        <span class="slider"></span>
+                        On
+
+                    </label>
+                </td>
+
+                <td class="text-center">
+                    {# <a href="{{ path('admin_services_supprimer') }}" class="btn btn-danger rounded-1 primary press modal-trigger" data-target="modal-delete"
+                       data-id="{{ service.id}}"  data-title="{{ service.title}}">Supprimer</a> #}
+                    <a href="{{ path("admin_services_supprimer",{id: service.id}) }}" class="btn btn-danger
+                     rounded-1 primary press modal-trigger" onclick="return confirm('Voulez-vous supprimer cette categorie')"
+                       data-target="modal-delete" >Supprimer</a>
+
+                </td>
+            </tr>
+            </tbody>
+            {% endfor %}
+        </table>
+    </div>
+
+{% endblock %}
+{% block  javascripts%}
+    <script>
+        window.onload = () => {
+            let activer = document.querySelectorAll("[type=checkbox]")
+            for (let bouton of activer) {
+                bouton.addEventListener("click", function () {
+                    let xmlhttp = new XMLHttpRequest;
+
+                    xmlhttp.open("get", `/admin/services/activer/${this.dataset.id}`)
+                    xmlhttp.send()
+                })
+            }
+
+        }
+    </script>
+
+{% endblock  %}

@@ -25,7 +25,7 @@ class Category
      * @var string|null
      * @ORM\Column(type="string", length=255)
      */
-    private ?string $name;
+    public ?string $name;
 
     /**
      * @var string
@@ -33,31 +33,43 @@ class Category
      * @ORM\Column(type="string", length=255)
      */
     private string $slug;
+    //ici ici
 
     /**
      * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="categories")
      */
-    private  $parent;
+    private  $parent ;
 
+   //orphanRemoval=true
     /**
-     * @ORM\OneToMany(targetEntity=Category::class, mappedBy="parent")
+     * @ORM\OneToMany(targetEntity=Category::class,mappedBy="parent",cascade={"persist","remove"})
      */
     private $categories;
+    //orphanRemoval=true
+
 
     /**
-     * @ORM\OneToMany(targetEntity=Service::class, mappedBy="category")
+     * @ORM\OneToMany(targetEntity=Service::class, mappedBy="category",cascade={"persist","remove"})
      */
     private  $services;
 
+    /**
+     * @return string
+     */
     public function __toString(): string
     {
         return $this->name;
     }
 
+
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
         $this->services = new ArrayCollection();
+
+
+
     }
 
     public function getId(): ?int
@@ -77,23 +89,34 @@ class Category
         return $this;
     }
 
-    public function getSlug(): ?string
+    /**
+     * @return string
+     */
+    public function getSlug(): string
     {
         return $this->slug;
     }
 
 
-    public function getParent(): ?self
+    /**
+     * @return Category|null
+     */
+    public function getParent(): ?Category
     {
         return $this->parent;
     }
 
-    public function setParent(?self $parent): self
+    /**
+     * @param Category $parent
+     */
+    public function setParent(Category $parent): void
     {
         $this->parent = $parent;
-
-        return $this;
     }
+
+
+
+
 
     /**
      * @return Collection

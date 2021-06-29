@@ -1,0 +1,20 @@
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+{% if app.request.attributes.get('_route') == 'service_edit' %}
+    <h1>Images</h1>
+    {% for image in service.images  %}
+      <div>
+        <img src="{{ asset('/uploads/'~image.name) }}" alt="Image" width="400">
+        <a href="{{ path('delete_image',{'id':image.id}) }}" data-delete
+        data-token="{{ csrf_token('delete'~image.id) }}" >Supprimer</a>
+     </div>
+   {% endfor %}
+
+{% endif %}
+
+
+
+
+    <button class="btn">{{ button_label|default('Save') }}</button>
+
+{{ form_end(form) }}

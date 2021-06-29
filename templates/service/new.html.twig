@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}service{% endblock %}
+
+{% block body %}
+    <h1>Proposer un service</h1>
+
+        {{ include('service/_form.html.twig') }}
+
+    <a href="{{ path('service_index') }}">retour à la liste</a>
+{% endblock %}

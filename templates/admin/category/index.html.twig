@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gérer les Categories{% endblock %}
+
+
+
+{% block body %}
+
+    {% block content  %}
+        <div class="jumbotron">
+            <h1 class="display-4">Administration</h1>
+            <p class="lead"> Administration D' openJobs</p>
+        </div>
+
+    {% endblock  %}
+
+
+    <h1>Gérer les Categories </h1>
+
+    <a href="{{ path("category_ajout") }}" class="btn btn-primary rounded-1 primary press modal-trigger" data-target="modal-delete">Add Categorie </a>
+
+    <div class="responsive-table">
+        <table class="table striped">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nom</th>
+                <th>Parent</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            {% for categorie in categories %}
+            <tbody>
+            <tr>
+                <td>{{ categorie.id }}</td>
+                <td>{{ categorie.name }}</td>
+                <td>{{ categorie.parent }}</td>
+                <td class="text-center">
+                    <a href="{{ path("category_supprimer",{id: categorie.id}) }}" class="btn btn-danger rounded-1 primary press modal-trigger" data-target="modal-delete"  onclick="return confirm(
+                     'Voulez-vous supprimer cette categorie')">Supprimer</a>
+                    <a href="{{ path("category_modifier",{id: categorie.id}) }}" class="btn btn-primary rounded-1 primary press modal-trigger" data-target="modal-delete"> Modifier</a>
+                </td>
+            </tr>
+            </tbody>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}
