@@ -1,8 +1,15 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/index.html.twig' %}
 
 {% block title %}Ajouter une categorie{% endblock %}
 
 {% block body %}
+{% block content  %}
+        <div class="jumbotron">
+            <h1 class="display-4">Administration</h1>
+            <p class="lead"> Administration D' openJobs</p>
+        </div>
+
+    {% endblock  %}
   <h1>Ajouter une categorie </h1>
   {{ form(form) }}
 {% endblock %}

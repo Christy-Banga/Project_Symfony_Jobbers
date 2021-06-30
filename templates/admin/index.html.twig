@@ -1,4 +1,91 @@
-{% extends 'base.html.twig' %}
+<!doctype html>
+<html lang="en">
+  <head>
+  	<title>{% block title %}Welcome!{% endblock %}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    {% block stylesheets %}
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+		
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        {# <link rel="stylesheet" href="{{ asset("assets/css/style-starter.css") }}" ></link> #}
+        <link rel="stylesheet" href="{{ asset("admin/css/style.css") }}" ></link>
+        
+    {% endblock %}
+  </head>
+  <body>
+		
+	<div class="wrapper d-flex align-items-stretch">
+		<nav id="sidebar">
+			<div class="custom-menu">
+				<button type="button" id="sidebarCollapse" class="btn btn-primary">
+	            <i class="fa fa-bars"></i>
+	             <span class="sr-only">Toggle Menu</span>
+	            </button>
+            </div>
+				<div class="p-4 pt-5">
+		  		<h1><a href="index.html" class="logo">Jobbers</a></h1>
+	        <ul class="list-unstyled components mb-5">
+	          {# <li class="active"> 
+	            <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
+	            <ul class="collapse list-unstyled" id="homeSubmenu">
+                    <li>
+                        <a href="#">Home 1</a>
+                    </li>
+                    <li>
+                        <a href="#">Home 2</a>
+                    </li>
+                    <li>
+                        <a href="#">Home 3</a>
+                    </li>
+	            </ul>
+	          </li> #}
+              <li>
+	                <a href="/admin">Accueil</a>
+	          </li>
+	          <li>
+	                <a href="/admin/category">Gérer les catégories</a>
+	          </li>
+	          <li>
+                    <a href="/admin/services">Gérer les services</a>
+	          </li>
+	        </ul>
+            <div class="mb-5">
+						<a class="h6" href="/">Aller sur Jobbers</a>
+						
+			</div>
+
+
+	      </div>
+    	    </nav>
+
+        <!-- Page Content  -->
+        
+      <div id="content" class="p-4 p-md-5 pt-5">
+
+        {% block body %}
+        {% block content  %}
+        <div class="jumbotron">
+            <h1 class="display-4">Administration</h1>
+            <p class="lead"> Administration D' openJobs</p>
+        </div>
+
+    {% endblock  %}
+            
+        {% endblock %}
+        
+      </div>
+	</div>
+    {% block javascripts %}
+    <script src="{{ asset("admin/js/jquery.min.js")}}"></script>
+    <script src="{{ asset("admin/js/popper.js")}}"></script>
+    <script src="{{ asset("admin/js/bootstrap.min.js")}}"></script>
+    <script src="{{ asset("admin/js/main.js")}}"></script>
+    {% endblock %}
+  </body>
+</html>
+{# {% extends 'base.html.twig' %}
 
 {% block title %}Hello AdminController!{% endblock %}
 
@@ -17,4 +104,4 @@
         <li>Your template at <code><a href="{{ 'C:/projet/Jobbers/templates/admin/index.html.twig'|file_link(0) }}">templates/admin/index.html.twig</a></code></li>
     </ul>
 </div>
-{% endblock %}
+{% endblock %} #}
