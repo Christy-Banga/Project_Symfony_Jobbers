@@ -70,7 +70,7 @@ class LoginAuthenticator extends AbstractFormLoginAuthenticator implements Passw
         $user = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $credentials['email']]);
 
         if (!$user) {
-            throw new UsernameNotFoundException('Email could not be found.');
+            throw new UsernameNotFoundException('Email introuvable.');
         }
 
         return $user;
@@ -96,6 +96,7 @@ class LoginAuthenticator extends AbstractFormLoginAuthenticator implements Passw
         }
 
          return new RedirectResponse($this->urlGenerator->generate('app_home'));
+
         //throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
     }
 

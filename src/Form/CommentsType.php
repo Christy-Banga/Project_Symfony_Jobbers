@@ -17,18 +17,18 @@ class CommentsType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('email',EmailType::class,[
-                'label' => 'Votre e-mail',
-                'attr' => [
-                    'class' => 'form-control'
-                ]
-            ])
-            ->add('pseudo',TextType::class,[
-                'label' => 'Votre pseudo',
-                'attr' => [
-                    'class' => 'form-control'
-                ]
-            ])
+            // ->add('email',EmailType::class,[
+            //     'label' => 'Votre e-mail',
+            //     'attr' => [
+            //         'class' => 'form-control'
+            //     ]
+            // ])
+            // ->add('pseudo',TextType::class,[
+            //     'label' => 'Votre pseudo',
+            //     'attr' => [
+            //         'class' => 'form-control'
+            //     ]
+            // ])
             ->add('content', TextareaType::class,[
                 'label' => 'Votre commentaire',
                 'attr' => [
@@ -38,7 +38,11 @@ class CommentsType extends AbstractType
             ->add('parentid', HiddenType::class, [
                 'mapped' => false
             ])
-            ->add('envoyer',SubmitType::class)
+            ->add('envoyer',SubmitType::class,[
+                "attr" => [
+                    "class" => "btn shadow-1 rounded-1 small primary uppercase mt-2"
+                ]
+            ])
         ;
     }
 

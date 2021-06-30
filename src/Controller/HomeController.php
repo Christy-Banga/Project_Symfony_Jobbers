@@ -33,12 +33,11 @@ class HomeController extends AbstractController
             );
             
         }
-
         
         $serviceRepository = $paginator->paginate(
             $donnees,// On passe les données 
             $request->query->getInt('page',1), //Numero de la page en cours, 1 par défaut
-            2
+            1
         );
         return $this->render('home/index.html.twig', [
             'services' => $serviceRepository,

@@ -56,6 +56,20 @@ class ServiceController extends AbstractController
      */
     public function remove(Service $service):Response
     {
+        //suppression des images sur le  disque  apres suppression du service
+        $images = $service->getImages();
+        if($images){
+            foreach($images as $image){
+                $nomImage= $this->getParameter("images_directory").'/'.$image->getName();
+                // verification si le fichier existe ( if(file_exists($nomImage) pour chacune des images mais pas obligatoire
+
+                if(file_exists($nomImage)){
+                    unlink($nomImage);
+                }
+
+
+        }
+        }
         //$service->setActive(($service->getActive())?false:true);
         $em =$this->getDoctrine()->getManager();
         $em->remove($service );

@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'user.html.twig' %}
 
 {% block title %}Inscription{% endblock %}
 
@@ -7,9 +7,9 @@
 <div class="alert alert-danger" role="alert">{{ flashError }}</div>
 {% endfor %}
 
-<div class="main">
+<div class="main-login">
 <style>
-.main{
+.main-login{
     font-size: 14px;
     line-height: 1.8;
     color: #222;
@@ -24,7 +24,7 @@
     -ms-background-size: cover;
     background-position: center center;
     display : block;
-    padding: 115px 0;
+    padding: 5px 0;
     }
 .loginhere {
     font-size:15px;
@@ -38,7 +38,7 @@
     font-weight: 700;
     color: #222;
 }
-.container{
+.container-fluid .login{
   width: 660px;
     position: relative;
     margin: 0 auto;
@@ -70,7 +70,7 @@
     margin-inline-end: 0px;
     font-weight: bold;
 }
-.submit{
+.submit-login{
     width: 100%;
     border-radius: 5px;
     -moz-border-radius: 5px;
@@ -92,7 +92,7 @@
 }
 </style>
     <section style="display: block;">
-        <div class="container w-100 mt-5">
+        <div class="container-fluid login w-50 mt-5">
             <div class="row register"> 
                 <div class="col-md-1"></div>
                 <div class="col-md-10">
@@ -128,7 +128,7 @@
                         </span>
                         I agree all statements in  <a href="#" class="term-service">Terms of service</a></label>
                     </div>
-                    <button type="submit" class="submit">Sign Up</button>
+                    <button type="submit" class="submit-login">Sign Up</button>
                     <p class="loginhere">
                         Have already an account ? <a href="/login" class="loginhere-link">Login here</a>
                     </p>

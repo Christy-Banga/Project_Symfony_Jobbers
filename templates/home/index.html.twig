@@ -1,6 +1,6 @@
-{% extends 'base.html.twig' %}
+{% extends 'user.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %} {% endblock %}
 
 {% block body %}
     <div class="container">
@@ -23,7 +23,7 @@
                 </div>
             {% endfor %}
         </div><br>
-        <div class="pagination justify-content-center">
+        <div class="pagination">
             {{knp_pagination_render(services)}}
         </div>
     </div>

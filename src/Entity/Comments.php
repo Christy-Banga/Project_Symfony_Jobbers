@@ -19,6 +19,11 @@ class Comments
      */
     private $id;
 
+     /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="comments")
+     */
+    private $user;
+
     /**
      * @ORM\Column(type="text")
      */
@@ -29,15 +34,6 @@ class Comments
      */
     private $active = false;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $email;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $pseudo;
 
     /**
      * @ORM\Column(type="datetime_immutable")
@@ -70,6 +66,18 @@ class Comments
         return $this->id;
     }
 
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
     public function getContent(): ?string
     {
         return $this->content;
@@ -94,29 +102,6 @@ class Comments
         return $this;
     }
 
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): self
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
-    public function getPseudo(): ?string
-    {
-        return $this->pseudo;
-    }
-
-    public function setPseudo(string $pseudo): self
-    {
-        $this->pseudo = $pseudo;
-
-        return $this;
-    }
 
     public function getCreatedAt(): ?\DateTimeImmutable
     {
