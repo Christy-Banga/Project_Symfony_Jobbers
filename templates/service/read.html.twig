@@ -2,63 +2,93 @@
 
 {% block title %}{{ service.title}}{% endblock %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+{% endblock %}
+
 {% block body %}
-    <article>
-        <div class="contentimage card-columns">
-            <img src="{{asset('uploads/'~service.images[0].name) }}" alt="{{ service.title}}" width="300x400">
-            {# inserer carousel puisqu' il y ' a plusieurs images uploader#}
-            <div class="card-header">{{service.title}}</div>
-            <div class="card-content">
-                {# <p> Activité:{{service.category }}</p>>#}
-                <p>{{service.content|raw}}</p>
-
-                {% if is_granted("ROLE_USER") %}
-
-
-                        <div class="list-group">
-                        <a href="{{ path("app_message") }}" class="list-group-item list-group-item active ">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
-                                <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383-4.758 2.855L15 11.114v-5.73zm-.034 6.878L9.271 8.82 8 9.583 6.728 8.82l-5.694 3.44A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.739zM1 11.114l4.758-2.876L1 5.383v5.73z"/>
-                            </svg>ENVOYER UN MESSAGE
-                        </a>
-                        </div>
-
-                {% else  %}
-
-                    <div class="list-group">
-                        <a href="{{ path("app_login") }}" class="list-group-item list-group-item active ">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
-                                <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383-4.758 2.855L15 11.114v-5.73zm-.034 6.878L9.271 8.82 8 9.583 6.728 8.82l-5.694 3.44A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.739zM1 11.114l4.758-2.876L1 5.383v5.73z"/>
-                            </svg>ENVOYER UN MESSAGE
-                        </a>
-                    </div>
-
-                {% endif %}
+    <div class="container">
+        <div class="caroulix" id="example-caroulix" data-ax="caroulix" data-ax-caroulix-autoplay-enabled="true" data-caroulix-indicators-enabled="true">
+            <div class="caroulix-arrow caroulix-prev">
+              <i class="fas fa-chevron-left"></i>
             </div>
-            
-{# Commentaire #}
-    <div class="grix xs2 sm3 gutter-0 card">
-        <div class="col-xs2 col-sm3" id="ajout-commentaire">
-            <h2>Ajouter un commentaire</h2>
-            {{form(commentForm)}}
-        </div>
-        <div class="col-xs2 col-sm3">
-            <h2>Liste des commentaires</h2>
-            {% for comment in service.comments %}
-                {% if comment.parent == null %}
-                <h3>Commentaires {{loop.index}}</h3>
-                    <p><span class="text-muted"> {{comment.createdAt|ago(locale='fr')}} - {{comment.pseudo}} </span></p>
-                    <div>{{comment.content}}</div><br>
-                    <p><a href="#ajout-commentaire" data-reponse data-id="{{comment.id}}" class="btn btn-primary">Répondre</a></p>
-                    <div class="col-md-5">
-                    {# On affiche les réponses des commentaires parents juste en decalage #}
-                    {% for reponse in comment.reponses %}
-                        <p><span class="text-muted"> {{reponse.createdAt|ago(locale='fr')}} - {{reponse.pseudo}} </span></p>
-                        <div>{{reponse.content}}</div><br>
-                    {% endfor %}
-                </div>
-                {% endif %}
+            <div class="caroulix-arrow caroulix-next">
+              <i class="fas fa-chevron-right"></i>
+            </div>
+            {% for image in service.images %}
+            <div class="caroulix-item">
+                <img src="{{asset('uploads/'~ image.name) }}" alt="{{ service.title}}" width="300x400"/>
+            </div>
             {% endfor %}
+        </div>
+        <div class="grix xs2 sm3 gutter-0 card">
+            <div class="primary flex vcenter fx-center"></div>
+            <div class="col-sm2">
+                {# inserer carousel puisqu' il y ' a plusieurs images uploader#}
+                <div class="card-header">{{service.title}}</div>
+                <div class="card-content">
+                    <!-- <p> Activité:{{service.category.name }}</p> -->
+                    <p>{{service.content|raw}}</p>
+
+                    {% if is_granted("ROLE_USER") %}
+                        <div class="list-group">
+                            <a href="{{ path("app_message") }}" class="btn shadow-1 rounded-1 small primary uppercase mt-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
+                                    <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383-4.758 2.855L15 11.114v-5.73zm-.034 6.878L9.271 8.82 8 9.583 6.728 8.82l-5.694 3.44A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.739zM1 11.114l4.758-2.876L1 5.383v5.73z"/>
+                                </svg> Envoyer un message
+                            </a>
+                        </div>
+                    {% else  %}
+                        <div class="list-group">
+                            <a href="{{ path("app_login") }}" class="btn shadow-1 rounded-1 small primary uppercase mt-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
+                                    <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383-4.758 2.855L15 11.114v-5.73zm-.034 6.878L9.271 8.82 8 9.583 6.728 8.82l-5.694 3.44A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.739zM1 11.114l4.758-2.876L1 5.383v5.73z"/>
+                                </svg> Envoyer un message
+                            </a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+            
+        {# Commentaire #}
+        {% if is_granted("ROLE_USER") %}
+        
+        <div class="grix xs2 sm3 gutter-0 card">
+            <div class="col-xs2 col-sm3" id="ajout-commentaire">
+                <h2>Ajouter un commentaire</h2>
+                    {{form(commentForm)}}
+            </div>
+        
+        {% else %}
+                
+            <div class="col-xs2 col-sm3" id="ajout-commentaire">     
+                <h2>Ajouter un commentaire</h2>
+                    {{form_row(commentForm.content)}}
+                <a href="{{ path("app_login") }}">
+                    <button type="submit" class="btn shadow-1 rounded-1 small primary uppercase mt-2">Envoyer</button>
+                </a>
+            </div>
+                
+        {% endif %}   
+            
+            <div class="col-xs2 col-sm3">
+                <h2>Liste des commentaires</h2>
+                {% for comment in service.comments %}
+                    {% if comment.parent == null %}
+                    <h3>Commentaires {{loop.index}}</h3>
+                        <p><span class="text-muted"> {{comment.createdAt|ago(locale='fr')}} - {{comment.user.name}} {{comment.user.firstname}} </span></p>
+                        <div>{{comment.content}}</div><br>
+                        <p><a href="#ajout-commentaire" data-reponse data-id="{{comment.id}}" class="btn shadow-1 rounded-1 small primary uppercase mt-2">Répondre</a></p>
+                        <div class="col-md-5">
+                        {% for reponse in comment.reponses %}
+                            <p><span class="text-muted"> {{reponse.createdAt|ago(locale='fr')}} - {{comment.user.name}} {{comment.user.firstname}} </span></p>
+                            <div>{{reponse.content}}</div><br>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
         </div>
     </div>
 {% endblock %}
@@ -72,5 +102,9 @@
             });
         });
     }
+
+    let caroulix = new Caroulix('#example-caroulix');
+
+
     </script>
 {% endblock %}

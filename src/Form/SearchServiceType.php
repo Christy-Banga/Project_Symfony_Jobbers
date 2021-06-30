@@ -34,7 +34,7 @@ class SearchServiceType extends AbstractType
             ])
             ->add('Rechercher',SubmitType::class,[
                 'attr' => [
-                    'class' => 'btn btn-primary'
+                    'class' => 'btn shadow-1 rounded-1 small primary uppercase mt-2'
                 ]
             ])
         ;

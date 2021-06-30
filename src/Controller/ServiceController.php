@@ -180,6 +180,7 @@ class ServiceController extends AbstractController
         if (!$service){ throw new NotFoundHttpException('le service souhaite  n\'exite pas');}
 
         //Commentaire
+        
         $comment = new Comments;
 
         $commentForm = $this->createForm(CommentsType::class, $comment);
@@ -189,6 +190,7 @@ class ServiceController extends AbstractController
         if($commentForm->isSubmitted() && $commentForm->isValid()){
             $comment->setCreatedAt(new DateTimeImmutable());
             $comment->setService($service);
+            $comment->setUser($this->getUser());
 
             //On récupère le contenu du commentaire parent
             $parentid = $commentForm->get("parentid")->getData();
