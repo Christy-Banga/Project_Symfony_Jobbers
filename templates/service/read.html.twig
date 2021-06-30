@@ -1,10 +1,10 @@
-{% extends 'user.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block title %}{{ service.title}}{% endblock %}
 
-{% block stylesheets %}
+{# {% block stylesheets %}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
-{% endblock %}
+{% endblock %} #}
 
 {% block body %}
     <div class="container">
@@ -93,7 +93,7 @@
     </div>
 {% endblock %}
 
-{% block javascripts %}
+{# {% block javascripts %}
     <script>
         window.onload = () => {
         document.querySelectorAll("[data-reponse]").forEach(element => {
@@ -107,4 +107,4 @@
 
 
     </script>
-{% endblock %}
+{% endblock %} #}
