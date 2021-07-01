@@ -22,6 +22,7 @@ class RegistrationFormType extends AbstractType
             ->add('email',TextType::class,['label'=>'Email:'])
             ->add('name',TextType::class,['label'=>'Nom:'])
             ->add('firstname',TextType::class,['label'=>'Prénoms:'])
+            ->add('telephone',TextType::class,['label'=>'Numéro de téléphone:'])
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
                 'constraints' => [
@@ -35,7 +36,7 @@ class RegistrationFormType extends AbstractType
                     "type"=>PasswordType::class,
                     "mapped"=>false,
                     "first_options"=>[
-                        "label"=>"mot de passe:",
+                        "label"=>"Mot de passe:",
                         "attr" => [
                             'class' => 'form-control mb-3',
                         ]

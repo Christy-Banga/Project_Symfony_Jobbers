@@ -17,24 +17,24 @@
 
     <h1>Gérer les Categories </h1>
 
-    <a href="{{ path("category_ajout") }}" class="btn btn-primary rounded-1 primary press modal-trigger" data-target="modal-delete">Add Categorie </a>
+    <a href="{{ path("category_ajout") }}" class="btn btn-primary rounded-1 primary press modal-trigger" data-target="modal-delete">Ajouter une catégorie </a>
 
-    <div class="responsive-table">
+    <div class="responsive-table mt-2">
         <table class="table striped">
             <thead>
             <tr>
-                <th>ID</th>
-                <th>Nom</th>
-                <th>Parent</th>
-                <th>Action</th>
+                <th class="text-center">ID</th>
+                <th class="text-center">Nom</th>
+                {# <th>Parent</th> #}
+                <th class="text-center">Action</th>
             </tr>
             </thead>
             {% for categorie in categories %}
             <tbody>
             <tr>
-                <td>{{ categorie.id }}</td>
-                <td>{{ categorie.name }}</td>
-                <td>{{ categorie.parent }}</td>
+                <td class="text-center">{{ categorie.id }}</td>
+                <td class="text-center">{{ categorie.name }}</td>
+                {# <td>{{ categorie.parent }}</td> #}
                 <td class="text-center">
                     <a href="{{ path("category_supprimer",{id: categorie.id}) }}" class="btn btn-danger rounded-1 primary press modal-trigger" data-target="modal-delete"  onclick="return confirm(
                      'Voulez-vous supprimer cette categorie')">Supprimer</a>

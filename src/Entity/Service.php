@@ -56,7 +56,7 @@ class Service
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="services",cascade={"persist","remove"})
      */
-    private ?User $user=null;
+    private ?User $user;
 
 
     //classe proprietaire de la relation reçoi cascade ={"persist","cascade"}

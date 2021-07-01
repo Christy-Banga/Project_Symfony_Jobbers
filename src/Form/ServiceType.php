@@ -18,8 +18,8 @@ class ServiceType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title',TextType::class,['label'=>'Profession:'])
-            ->add('content',TextareaType::class,['label'=>'Se Présenter:'])
+            ->add('title',TextType::class,['label'=>'Titre du service:'])
+            ->add('content',TextareaType::class,['label'=>'Se presenter:'])
             ->add('category',EntityType::class,
                 ["class"=>Category::class,
                     "label"=>'Métiers:'

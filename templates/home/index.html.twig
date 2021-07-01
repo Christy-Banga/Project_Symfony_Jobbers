@@ -62,7 +62,7 @@
                         <h4>{{service.title}}</h4>
                         <p>xxxxxx</p>
                         <div class="dst-btm">
-                            <h6 class=""> {{service.slug}} </h6>
+                            <h6 class=""> {{service.category}} </h6>
                             <a href="{{ path('service-read',{slug: service.slug}) }}"><span class="fa fa-search mr-3"aria-hidden="true">Voir plus</span></a>
                         </div>
                         <p class="sub-para">{{service.content|striptags|u.truncate(70,'...') }}</p>
