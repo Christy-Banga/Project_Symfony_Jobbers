@@ -1,9 +1,27 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-{% if app.request.attributes.get('_route') == 'service_edit' %}
+{{ form_start(form,{'attr':{'class':'signin-form',}}) }}
+<div class="input-grids">
+    <div class="form-group">
+        <label>Profession :</label>
+        {{ form_widget(form.title, {'attr': {'class': 'contact-input', 'placeholder' : 'Profession'}}) }}
+    </div>
+    <div class="form-group">
+        <label>Se présenter :</label>
+        {{ form_widget(form.content, {'attr': {'class': 'contact-input', 'placeholder' : 'Se présenter'}}) }}
+    </div>
+
+    <div class="form-group">
+        <label>Métiers :</label>
+        {{ form_widget(form.category, {'attr': {'class': 'form-control' , 'placeholder' : 'Métiers'}}) }}
+    </div>
+    <div class="">
+        <label>Images :</label>
+        {{ form_widget(form.images ,{'attr': {'class': 'form-control-file'}}) }}
+    </div>
+
+     {% if app.request.attributes.get('_route') == 'service_edit' %}
     <h1>Images</h1>
     {% for image in service.images  %}
-      <div>
+      <div class="form-group">
         <img src="{{ asset('/uploads/'~image.name) }}" alt="Image" width="400">
         <a href="{{ path('delete_image',{'id':image.id}) }}" data-delete
         data-token="{{ csrf_token('delete'~image.id) }}" >Supprimer</a>
@@ -12,9 +30,22 @@
 
 {% endif %}
 
+    <div class="text-right">
+      {{ form_widget(form.Valider, {'attr': {'class': 'btn btn-style btn-secondary'}}) }}
+    </div>
+
+
+   
+
+</div>
 
 
 
-    <button class="btn">{{ button_label|default('Save') }}</button>
+
+    {# <button class="btn">{{ button_label|default('Save') }}</button> #}
 
 {{ form_end(form) }}
+
+
+                
+            

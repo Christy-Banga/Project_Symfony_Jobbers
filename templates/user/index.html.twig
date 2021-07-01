@@ -4,12 +4,79 @@
 
 
 {% block body %}
-<div class="grix xs1 container">
-    {#{% for message in app.flashes("message") %}
+
+
+
+<!-- about breadcrumb -->
+  <section class="w3l-about-breadcrumb text-left">
+    <div class="breadcrumb-bg breadcrumb-bg-about py-sm-5 py-4">
+      <div class="container py-2">
+        <h2 class="title">Mon compte</h2>
+        <ul class="breadcrumbs-custom-path mt-2">
+          {% block breadcrumbtitle %}
+          <li><a href="/">Accueil</a></li>
+          <li class="active"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span> Mon compte </li>
+          {% endblock %}
+        </ul>
+      </div>
+    </div>
+  </section>
+  <!-- //about breadcrumb -->
+  {% block bodyuser %}
+  <!-- contact-form -->
+<section class="w3l-contact" id="contact">
+  <div class="contact-infubd py-5">
+    <div class="container py-lg-3">
+      <div class="contact-grids row">
+
+        {% for message in app.flashes("message") %}
+        <div class="col-12">
+            <div class="p-3 my-2 rounded-2 success">{{message }}</div>
+        </div>
+        {% endfor %}
+        <div class="col-lg-6 contact-right">
+          <div class="partners">
+
+            <div class="cont-details">
+              <h5>Mon profil</h5>
+              <p class="mt-3 mb-4">Profil de {{ app.user.firstname }} {{ app.user.name }}</p>
+            </div>
+
+            <div class="hours">
+              <h6 class="mt-4">Email :</h6>
+              <p>{{ app.user.email }}</p>
+              <h6 class="mt-4">Nom :</h6>
+              <p> {{ app.user.name }}</p>
+              <h6 class="mt-4">Prénoms :</h6>
+              <p class="margin-top">{{ app.user.firstname }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 mt-lg-0 mt-5 contact-left">
+          <form action="https://sendmail.w3layouts.com/submitForm" method="post" class="signin-form">
+            
+            <div class="text-left" style="margin-bottom : 10px">
+              <a href="{{ path("user_service_modifier") }}" class="btn btn-style btn-secondary" style="width : 100%">Modifier profil</a>
+            </div>
+
+            <div class="text-left" style="margin-bottom : 10px">
+              <a href="{{ path("password_modifier") }}" class="btn btn-style btn-secondary" style="width : 100%">Modifier mot de passe</a>
+            </div>
+          </form>
+        </div>
+
+      </div>
+
+    </div>
+</section>
+<!-- /contact-form -->
+
+  {# <div class="grix xs1 container">
+    {% for message in app.flashes("message") %}
     <div class="col-xs1">
         <div class="p-3 my-2 rounded-2 success">{{message }}</div>
     </div>
-    {% endfor %}#}
+    {% endfor %}
 
         <div class="col-xs3">
             <h5>Profil de {{ app.user.firstname }} {{ app.user.name }}</h5>
@@ -35,13 +102,15 @@
 
 <div class="grix xs4 container ">
 
-    {# <div class="col-xs3"> <h6>Annonces de:{{ app.user.firstname }} {{ app.user.name }}</h6></div> #}
+    <div class="col-xs3"> <h6>Annonces de:{{ app.user.firstname }} {{ app.user.name }}</h6></div>
 
     {% for service in app.user.services %}
 
     <div class="col-xs3">Nom:{{ service.title}}</div>
     {% endfor %}
 </div>
-</div>
+</div> #}
+  {% endblock %}
+
 
 {% endblock %}

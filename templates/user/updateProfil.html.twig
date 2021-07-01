@@ -1,13 +1,59 @@
-{% extends 'base.html.twig' %}
-
+{% extends 'user/index.html.twig' %}
     {% block title %}Modification de  profil de {{ app.user.firstname }} {{ app.user.name }} {% endblock %}
 
+{% block breadcrumbtitle %}
+          <li><a href="/">Accueil</a></li>
+          <li ><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span><a href="/user"> Mon compte</a> </li>
+           <li class="active"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span> Modifier le profil </li>
+          {% endblock %}
 
-{% block body %}
-    <div class="grix xs4 container">
+{% block bodyuser %}
+        <!-- contact-form -->
+<section class="w3l-contact" id="contact">
+  <div class="contact-infubd py-5">
+    <div class="container py-lg-3">
+      <div class="contact-grids row">
+        <div class="col-lg-6 mt-lg-0 mt-5 contact-right"> 
+            {% for message in app.flashes("message") %}
+            <div class="col-12">
+                <div class="p-3 my-2 rounded-2 success">{{message }}</div>
+            </div>
+            {% endfor %} 
+            {{ form_start(form,{'attr':{'class':'signin-form',}}) }}
+            <div class="input-grids">
+                <div class="form-group">
+                    <label>Email :</label>
+                    {{ form_widget(form.email, {'attr': {'class': 'contact-input', 'placeholder' : 'Email'}}) }}
+                </div>
+                <div class="form-group">
+                    <label>Nom :</label>
+                    {{ form_widget(form.name, {'attr': {'class': 'contact-input', 'placeholder' : 'Nom'}}) }}
+                </div>
+                <div class="Prénoms">
+                    <label>Repéter mot de passe :</label>
+                    {{ form_widget(form.firstname, {'attr': {'class': 'contact-input', 'placeholder' : 'Prénoms'}}) }}
+                </div>
+
+            
+
+                <div class="text-right">
+                    {{ form_widget(form.valider, {'attr': {'class': 'btn btn-style btn-secondary'}}) }}
+                </div>
+
+            </div>
+
+
+            {{ form_end(form) }}
+        </div>
+
+      </div>
+
+    </div>
+</section>
+    {# <div class="grix xs4 container">
         <div class="col-xs3">
             <h3>Modification de profil de {{ app.user.firstname }} {{ app.user.name }}</h3>
             {{ form(form) }}
         </div>
-    </div>
+    </div> #}
 {% endblock %}
