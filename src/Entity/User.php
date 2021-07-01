@@ -74,6 +74,11 @@ class User implements UserInterface
      */
     private $received;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    public $Telephone;
+
 
     /**
      * @return mixed
@@ -326,6 +331,18 @@ class User implements UserInterface
                 $received->setRecepient(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getTelephone(): ?int
+    {
+        return $this->Telephone;
+    }
+
+    public function setTelephone(int $Telephone): self
+    {
+        $this->Telephone = $Telephone;
 
         return $this;
     }

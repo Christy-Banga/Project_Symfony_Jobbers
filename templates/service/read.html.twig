@@ -21,7 +21,14 @@
             </div>
             {% endfor %}
         </div>
-        <div class="grix xs2 sm3 gutter-0 card">
+
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            {% if (service.user.id == app.user.id) %}
+                <a href="{{ path('service_edit', {'id': service.id}) }}" class="btn btn-danger mt-2">Éditer</a>
+            {% endif %}
+        {% endif %}
+
+        <div class="grix xs2 sm3 gutter-0 card mt-2">
             <div class="primary flex vcenter fx-center"></div>
             <div class="col-sm2">
                 {# inserer carousel puisqu' il y ' a plusieurs images uploader#}
@@ -38,6 +45,22 @@
                                 </svg> Envoyer un message
                             </a>
                         </div>
+                        {# Fonction pour afficher boutton contact et masquer #}
+                        <script>
+                            $(document).ready(function(){
+                                $('#voir').click(function() {
+                                  $('.num').toggle("slide");
+                                });
+                            });
+                        </script>
+                        <div class="btn btn-danger" id="voir">
+                            Contact
+                        </div>
+                        <div class="num" style="display: none;">
+                            +212 {{service.user.telephone}}   
+                        </div>
+
+
                     {% else  %}
                         <div class="list-group">
                             <a href="{{ path("app_login") }}" class="btn shadow-1 rounded-1 small primary uppercase mt-2">
@@ -46,8 +69,25 @@
                                 </svg> Envoyer un message
                             </a>
                         </div>
+
+                         {# Fonction pour afficher boutton contact et masquer #}
+                         <script>
+                            $(document).ready(function(){
+                                $('#voir').click(function() {
+                                  $('.num').toggle("slide");
+                                });
+                            });
+                        </script>
+                        <div class="btn btn-danger" id="voir">
+                            Contact
+                        </div>
+                        <div class="num" style="display: none;">
+                           +212 {{service.user.telephone}}   
+                        </div>
+                       
                     {% endif %}
                 </div>
+                
             </div>
         </div>
             
@@ -73,7 +113,7 @@
         {% endif %}   
             
             <div class="col-xs2 col-sm3">
-                <h2>Liste des commentaires</h2>
+                <h2>Liste des commentaires</h2><br>
                 {% for comment in service.comments %}
                     {% if comment.parent == null %}
                     <h3>Commentaires {{loop.index}}</h3>
@@ -108,3 +148,4 @@
 
     </script>
 {% endblock %} #}
+

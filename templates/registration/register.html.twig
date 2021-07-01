@@ -102,12 +102,16 @@
                             'style':'display: block;margin-top: 0em;'
                             }
                     }) }}
-                    <h2 class="form-title">Create an account</h2>
+                    <h2 class="form-title">Créer un compte</h2>
                     {{ form_errors(registrationForm) }}  
                     {{ form_row(registrationForm.name,{
                         'attr':{'class':'form-control'}
                     }) }}
                     {{ form_row(registrationForm.firstname,{
+                        'attr':{'class':'form-control'}
+                    }) }}
+
+                    {{ form_row(registrationForm.telephone,{
                         'attr':{'class':'form-control'}
                     }) }}
                         
@@ -126,11 +130,11 @@
                         <span>
                             <span></span>
                         </span>
-                        I agree all statements in  <a href="#" class="term-service">Terms of service</a></label>
+                        J'accepte toutes les déclarations de <a href="#" class="term-service">Conditions d'utilisation</a></label>
                     </div>
-                    <button type="submit" class="submit-login">Sign Up</button>
+                    <button type="submit" class="submit-login">S'inscrire</button>
                     <p class="loginhere">
-                        Have already an account ? <a href="/login" class="loginhere-link">Login here</a>
+                        Vous avez déjà un compte ? <a href="/login" class="loginhere-link">Connectez-vous ici</a>
                     </p>
                     {{ form_end(registrationForm) }}
                 </div>

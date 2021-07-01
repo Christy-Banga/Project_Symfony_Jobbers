@@ -17,12 +17,12 @@ class CategoryType extends AbstractType
     {
         $builder
             ->add("name",TextType::class,['label'=>'Profession:'])
-            ->add("parent",EntityType::class,[
+            /* ->add("parent",EntityType::class,[
                 "class"=>Category::class,
                 'label'=>'Métiers:',
                 'expanded'=>false,
                 'multiple'=>false
-            ])
+            ]) */
             //->add("parent",)
             ->add("Valider",SubmitType::class)
 
