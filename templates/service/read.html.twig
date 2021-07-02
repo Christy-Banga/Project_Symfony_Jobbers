@@ -307,7 +307,7 @@ figcaption {
 <input type="radio" id="s-3" name="slider-control">
 <div class="js-slider">
     {% for image in service.images %}
-            <figure class="js-slider_item img-1">
+            <figure class="js-slider_item img-{{loop.index}}">
                 <div class="js-slider_img">
                 <img class="c-img-w-full" src="{{asset('uploads/'~ image.name) }}" alt="{{ service.title}}">
                 </div>
@@ -327,18 +327,33 @@ figcaption {
             {% endfor %}
 
   <div class="js-slider_nav">
+  {% for image in service.images %} 
+    {% if (loop.index == 1) %}
+    <label class="js-slider_nav_item s-nav-{{loop.index}} prev" for="s-{{service.images|length}}" ></label>
+    <label class="js-slider_nav_item s-nav-{{loop.index}} next" for="s-{{loop.index + 1}}"></label>  
+    {% endif %}
+    {% if (loop.index != 1 and loop.index != service.images|length) %}
+    <label class="js-slider_nav_item s-nav-{{loop.index}} prev" for="s-{{loop.index - 1}}" ></label>
+    <label class="js-slider_nav_item s-nav-{{loop.index}} next" for="s-{{loop.index + 1}}" ></label>
+    {% endif %}
+    {% if (loop.index == service.images|length) %}
+    <label class="js-slider_nav_item s-nav-{{loop.index}} prev" for="s-{{loop.index - 1}}" ></label>
+    <label class="js-slider_nav_item s-nav-{{loop.index}} next" for="s-{{1}}"></label>  
+    {% endif %}
+    {% endfor %}
+    {# 
     <label class="js-slider_nav_item s-nav-1 prev" for="s-3"></label>
     <label class="js-slider_nav_item s-nav-1 next" for="s-2"></label>
+    
     <label class="js-slider_nav_item s-nav-2 prev" for="s-1"></label>
     <label class="js-slider_nav_item s-nav-2 next" for="s-3"></label>
     <label class="js-slider_nav_item s-nav-3 prev" for="s-2"></label>
-    <label class="js-slider_nav_item s-nav-3 next" for="s-1"></label>
+    <label class="js-slider_nav_item s-nav-3 next" for="s-1"></label> #}
   </div>
   <div class="js-slider_indicator">
-    <div class="js-slider-indi indi-1"></div>
-    <div class="js-slider-indi indi-2"></div>
-    <div class="js-slider-indi indi-3"></div>
-    
+    {% for image in service.images %}
+    <div class="js-slider-indi indi-{{loop.index}}"></div>
+    {% endfor %}
   </div>
 </div>
     
