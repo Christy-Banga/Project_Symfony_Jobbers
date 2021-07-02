@@ -37,6 +37,25 @@ class ServiceRepository extends ServiceEntityRepository
         return $query->getQuery()->getResult();
     }
 
+
+
+
+    //compte le nombre d ' annonce   concernant les services sur le site
+    /**
+     * @return int|mixed|string|null
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public  function cuntAllService(){
+        $queryBuilder = $this->createQueryBuilder('s');
+        $queryBuilder->select('COUNT(s.id) as value');
+        return $queryBuilder->getQuery()->getOneOrNullResult();
+
+    }
+
+
+
+
+
     // /**
     //  * @return Service[] Returns an array of Service objects
     //  */

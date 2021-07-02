@@ -22,6 +22,9 @@ class UserUpdateType extends AbstractType
             ->add('email',TextType::class,['label'=>'Email:'])
             ->add('name', TextType::class,['label'=>'Nom:'])
             ->add('firstname',TextType::class,['label'=>'Prénoms:'])
+            ->add('Telephone', TextType::class,['label'=>'Téléphone:'])
+            ->add('ville', TextType::class,['label'=>'Ville:'])
+            ->add('commune', TextType::class,['label'=>'Commune:'])
 
             ->add('valider',SubmitType::class)
         ;

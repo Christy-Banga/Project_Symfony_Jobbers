@@ -1,0 +1,29 @@
+{% extends 'admin/index.html.twig' %}
+
+
+
+{% block title %} Bienvenue sur la plateforme Jobbers {% endblock %}
+
+
+{% block body %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-4 alert-info">
+                <span class="display-4" ><h3>{{ cuntAllUser["value"]}} </span>
+                Connecté(s)</h3>
+            </div>
+            <div class="col-4 alert-info">
+                <span class="display-4" > <h3>{{ cuntAllService["value"] }} </span>
+                Annonce(s)</h3>
+            </div>
+            <div class="col-4 alert-info">
+                <span class="display-4" ><h3>{{ cuntAllCategory["value"]}} </span>
+                Categorie(s)</h3>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}

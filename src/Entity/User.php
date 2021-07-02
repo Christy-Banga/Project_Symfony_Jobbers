@@ -79,6 +79,18 @@ class User implements UserInterface
      */
     public $Telephone;
 
+    /**
+     * @ORM\JoinColumn(nullable=true)
+     * @ORM\Column(type="string", length=100)
+     */
+    private ?string $ville;
+
+    /**
+     * @ORM\JoinColumn(nullable=true)
+     * @ORM\Column(type="string", length=100)
+     */
+    private ?string $commune;
+
 
     /**
      * @return mixed
@@ -343,6 +355,30 @@ class User implements UserInterface
     public function setTelephone(int $Telephone): self
     {
         $this->Telephone = $Telephone;
+
+        return $this;
+    }
+
+    public function getVille(): ?string
+    {
+        return $this->ville;
+    }
+
+    public function setVille(string $ville): self
+    {
+        $this->ville = $ville;
+
+        return $this;
+    }
+
+    public function getCommune(): ?string
+    {
+        return $this->commune;
+    }
+
+    public function setCommune(string $commune): self
+    {
+        $this->commune = $commune;
 
         return $this;
     }

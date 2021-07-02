@@ -19,6 +19,23 @@ class CategoryRepository extends ServiceEntityRepository
         parent::__construct($registry, Category::class);
     }
 
+
+
+
+    // pour compté le nombre d utilisateur du site
+    /**
+     * @return int|mixed|string|null
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public  function cuntAllCategory(){
+        $queryBuilder = $this->createQueryBuilder('p');
+        $queryBuilder->select('COUNT(p.id) as value');
+        return $queryBuilder->getQuery()->getOneOrNullResult();
+
+    }
+
+
+
     // /**
     //  * @return Category[] Returns an array of Category objects
     //  */

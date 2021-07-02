@@ -22,7 +22,9 @@ class RegistrationFormType extends AbstractType
             ->add('email',TextType::class,['label'=>'Email:'])
             ->add('name',TextType::class,['label'=>'Nom:'])
             ->add('firstname',TextType::class,['label'=>'Prénoms:'])
-            ->add('telephone',TextType::class,['label'=>'Numéro de téléphone:'])
+            ->add('ville',TextType::class,['label'=>'Ville:'])
+            ->add('commune',TextType::class,['label'=>'Commune:'])
+            ->add('Telephone',TextType::class,['label'=>'Numéro de téléphone:'])
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
                 'constraints' => [

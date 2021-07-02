@@ -29,7 +29,30 @@
                     <label>Nom :</label>
                     {{ form_widget(form.name, {'attr': {'class': 'contact-input', 'placeholder' : 'Nom'}}) }}
                 </div>
-                <div class="Prénoms">
+
+
+                <div class="form-group">
+                    <label>Téléphone :</label>
+                    {{ form_widget(form.Telephone, {'attr': {'class': 'contact-input', 'placeholder' : 'Téléphone'}}) }}
+                </div>
+
+
+
+
+                <div class="form-group">
+                    <label>Ville :</label>
+                    {{ form_widget(form.ville, {'attr': {'class': 'contact-input', 'placeholder' : 'Ville'}}) }}
+                </div>
+
+
+
+                <div class="form-group">
+                    <label>Commune :</label>
+                    {{ form_widget(form.commune, {'attr': {'class': 'contact-input', 'placeholder' : 'Commune'}}) }}
+                </div>
+
+
+                 <div class="Prénoms">
                     <label>Repéter mot de passe :</label>
                     {{ form_widget(form.firstname, {'attr': {'class': 'contact-input', 'placeholder' : 'Prénoms'}}) }}
                 </div>
@@ -49,6 +72,7 @@
       </div>
 
     </div>
+  </div>
 </section>
     {# <div class="grix xs4 container">
         <div class="col-xs3">
