@@ -3,7 +3,48 @@
 {% block title %}Service index{% endblock %}
 
 {% block body %}
-    <h1>Service index</h1>
+  <section class="w3l-about-breadcrumb text-left">
+    <div class="breadcrumb-bg breadcrumb-bg-about py-sm-5 py-4">
+      <div class="container">
+        <h2 class="title">Mes annonces  </h2>
+        <ul class="breadcrumbs-custom-path mt-2">
+          <li><a href="/">Accueil</a></li>
+          <li class="active"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span> Mes annonces </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  <!-- //about breadcrumb -->
+
+            
+   <!--  Work gallery section -->
+ <section class="grids-1 py-5">
+  <div class="grids py-lg-5 py-md-4">
+      <div class="container">
+          <h3 class="hny-title mb-5">Mes annonces</h3>
+          <div class="row">
+              {% for service in services %}
+              <div class="col-lg-4 col-md-4 col-6 mt-4">
+                  <div class="column">
+                      <a href="blog-single.html"><img src="{{asset('assets/images/g1.jpg')}}" alt="" class="img-fluid"></a>
+                      <div class="info">
+                          <h3 ><a style="color : gray" href="#">{{ service.title }}</a>&nbsp;&nbsp;<a href="{{ path('service_edit', {'id': service.id}) }}"><img src="https://img.icons8.com/office/30/000000/edit.png"/></a> </h3>
+                          <p>{{ service.createdAt ? service.createdAt|date('Y-m-d H:i:s') : '' }} </p>
+                          <div class="dst-btm">
+                            <h6 class="">{{ service.slug }} </h6>
+                            <span>{{ service.content }}</span>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              {% else %}
+              <h1>Aucune annonce</h1>
+              {% endfor %}
+          </div>
+      </div>
+</div></section>
+<!--  //Work gallery section -->
+    {# <h1>Service index</h1>
 
     <table class="table">
         <thead>
@@ -39,5 +80,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('service_new') }}">Proposer un service</a>
+    <a href="{{ path('service_new') }}">Proposer un service</a> #}
 {% endblock %}

@@ -2,17 +2,57 @@
 
 {% block title %}Modifier le service{% endblock %}
 
-{% block body %}
-    <h1>Modifier le service</h1>
 
-    {{ include('service/_form.html.twig', {'button_label': 'Update'}) }}
+
+{% block body %}
+<section class="w3l-about-breadcrumb text-left">
+    <div class="breadcrumb-bg breadcrumb-bg-about py-sm-5 py-4">
+      <div class="container">
+        <h2 class="title">Mes annonces  </h2>
+        <ul class="breadcrumbs-custom-path mt-2">
+          <li><a href="/">Accueil</a></li>
+          <li><a  href="/service"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span> Mes annonces </a> </li>
+          <li class="active"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span> Modifier une annonce </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  <!-- //about breadcrumb -->
+
+      <!-- contact-form -->
+<section class="w3l-contact" id="contact">
+  <div class="contact-infubd py-5">
+    <div class="container py-lg-3">
+      <div class="contact-grids row">
+      <div class="col-lg-6 contact-left">
+   
+            {{ include('service/_form.html.twig', {'button_label': 'Update'}) }}
+
+          </div>
+          <div class="col-lg-6 mt-lg-0 mt-5 contact-right">
+               
+
+
+                {{ include('service/_delete_form.html.twig') }}
+        </div>
+        
+            
+        </div>
+
+      </div>
+
+    </div>
+</section>
+
+    {# {{ include('service/_form.html.twig', {'button_label': 'Update'}) }}
 
     <a href="{{ path('service_index') }}">Retour à la liste</a>
 
-    {{ include('service/_delete_form.html.twig') }}
+    {{ include('service/_delete_form.html.twig') }} #}
+     <script src="{{ asset('js/images.js') }}"></script>
 {% endblock %}
 
-{% block javascripts %}
-    <script src="{{ asset('js/images.js') }}"></script>
-{% endblock %}
+{# {% block javascripts %}
+   
+{% endblock %} #}
 

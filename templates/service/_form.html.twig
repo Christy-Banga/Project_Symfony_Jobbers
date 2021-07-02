@@ -24,7 +24,7 @@
       <div class="form-group">
         <img src="{{ asset('/uploads/'~image.name) }}" alt="Image" width="400">
         <a href="{{ path('delete_image',{'id':image.id}) }}" data-delete
-        data-token="{{ csrf_token('delete'~image.id) }}" >Supprimer</a>
+        data-token="{{ csrf_token('delete'~image.id) }}" ><img src="https://img.icons8.com/office/30/000000/delete-sign.png"/></a>
      </div>
    {% endfor %}
 
