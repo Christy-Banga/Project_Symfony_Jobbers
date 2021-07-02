@@ -1,4 +1,4 @@
-{% extends 'user.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block title %}Inscription{% endblock %}
 
@@ -90,9 +90,12 @@
     background-image: -webkit-linear-gradient(to left,#74ebd5,#9face6);
     background-image: linear-gradient(to left,#74ebd5,#9face6);
 }
+.app{
+    appearance: auto;
+}
 </style>
-    <section style="display: block;">
-        <div class="container-fluid login w-50 mt-5">
+    <section class="w3l-contact" style="display: block;">
+        <div class="container-fluid login w-50 mt-5  py-5">
             <div class="row register"> 
                 <div class="col-md-1"></div>
                 <div class="col-md-10">
@@ -124,7 +127,7 @@
                     }) }}
                     <div class="form-group form-check">
                         {{ form_widget(registrationForm.agreeTerms,{
-                            'attr':{'class':'form-check-input'}
+                            'attr':{'class':'form-check-input app'}
                         }) }}
                         <label for="agree-term" style="font-size: 12px;font-weight: 600;color: #555;">
                         <span>
