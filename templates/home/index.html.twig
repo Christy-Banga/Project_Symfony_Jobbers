@@ -60,7 +60,8 @@
                         </div>
                         <div class="col-sm-7 subject-content mt-sm-0 mt-4">
                         <h4>{{service.title}}</h4>
-                        <p>xxxxxx</p>
+                        <p>{{service.user.name}} {{service.user.firstname}}</p>
+                        <p class="text-muted text-sm">{{service.createdAt|ago(locale='fr')}}</p>
                         <div class="dst-btm">
                             <h6 class=""> {{service.category}} </h6>
                             <a href="{{ path('service-read',{slug: service.slug}) }}"><span class="fa fa-search mr-3"aria-hidden="true">Voir plus</span></a>
