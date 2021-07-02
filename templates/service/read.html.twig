@@ -440,7 +440,7 @@ figcaption {
                             Voir Contact
                         </div>
 
-                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        
             {% if (service.user.id == app.user.id) %}
                 <a href="{{ path('service_edit', {'id': service.id}) }}" class="btn btn-style btn-secondary ">Éditer</a>
             {% endif %}
@@ -496,7 +496,7 @@ figcaption {
                     </div></div>
                 </div>
                     
-        {% endif %}
+        
                     {% if is_granted("ROLE_USER") %}
                     {{ form_start(commentForm) }}
                                 {{ form_widget(commentForm.content, {'attr': {'class': 'form-control' }}) }}
@@ -551,7 +551,7 @@ figcaption {
                         <a class="btn btn-sm btn-default btn-hover-success" href="#"><i class="fa fa-thumbs-up"></i></a>
                         <a class="btn btn-sm btn-default btn-hover-danger" href="#"><i class="fa fa-thumbs-down"></i></a>
                     </div>
-                    <a class="btn btn-sm btn-default btn-hover-primary" href="#ajout-commentaire" data-reponse data-id="{{comment.id}}" >Répondre</a>
+                    <a class="btn btn-secondary btn-sm" href="#ajout-commentaire" data-reponse data-id="{{comment.id}}" >Répondre</a>
                     </div>
                     <hr>
 
