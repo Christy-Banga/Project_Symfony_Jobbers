@@ -32,7 +32,8 @@ class CommentsType extends AbstractType
             ->add('content', TextareaType::class,[
                 'label' => 'Votre commentaire',
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control',
+                    'placeholder'=> 'Ecrivez un commentaire'
                 ]
             ])
             ->add('parentid', HiddenType::class, [
@@ -40,7 +41,7 @@ class CommentsType extends AbstractType
             ])
             ->add('envoyer',SubmitType::class,[
                 "attr" => [
-                    "class" => "btn shadow-1 rounded-1 small primary uppercase mt-2"
+                    "class" => "btn btn-sm btn-primary pull-right"
                 ]
             ])
         ;

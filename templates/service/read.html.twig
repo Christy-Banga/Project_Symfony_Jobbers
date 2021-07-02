@@ -7,8 +7,342 @@
 {% endblock %} #}
 
 {% block body %}
+
+    <style>
+            body{
+            margin-top:20px;
+        }
+
+        .img-sm {
+            width: 46px;
+            height: 46px;
+        }
+
+        .panel {
+            box-shadow: 0 2px 0 rgba(0,0,0,0.075);
+            border-radius: 0;
+            border: 0;
+            margin-bottom: 15px;
+        }
+
+        .panel .panel-footer, .panel>:last-child {
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+
+        .panel .panel-heading, .panel>:first-child {
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+        }
+
+        .panel-body {
+            padding: 25px 20px;
+        }
+
+
+        .media-block .media-left {
+            display: block;
+            float: left
+        }
+
+        .media-block .media-right {
+            float: right
+        }
+
+        .media-block .media-body {
+            display: block;
+            overflow: hidden;
+            width: auto
+        }
+
+        .middle .media-left,
+        .middle .media-right,
+        .middle .media-body {
+            vertical-align: middle
+        }
+
+        .thumbnail {
+            border-radius: 0;
+            border-color: #e9e9e9
+        }
+
+        .tag.tag-sm, .btn-group-sm>.tag {
+            padding: 5px 10px;
+        }
+
+        .tag:not(.label) {
+            background-color: #fff;
+            padding: 6px 12px;
+            border-radius: 2px;
+            border: 1px solid #cdd6e1;
+            font-size: 12px;
+            line-height: 1.42857;
+            vertical-align: middle;
+            -webkit-transition: all .15s;
+            transition: all .15s;
+        }
+        .text-muted, a.text-muted:hover, a.text-muted:focus {
+            color: #acacac;
+        }
+        .text-sm {
+            font-size: 0.9em;
+        }
+        .text-5x, .text-4x, .text-5x, .text-2x, .text-lg, .text-sm, .text-xs {
+            line-height: 1.25;
+        }
+
+        .btn-trans {
+            background-color: transparent;
+            border-color: transparent;
+            color: #929292;
+        }
+
+        .btn-icon {
+            padding-left: 9px;
+            padding-right: 9px;
+        }
+
+        .btn-sm, .btn-group-sm>.btn, .btn-icon.btn-sm {
+            padding: 5px 10px !important;
+        }
+
+        .mar-top {
+            margin-top: 15px;
+        }
+
+        hr{
+            background-color : white;
+        }
+
+        * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  
+}
+li {
+  list-style: none;
+}
+input[type="radio"] {
+  display: none;
+}
+.js-slider {
+  position: relative;
+  width: 80%;
+  height: 100vh;
+  margin: 0 auto;
+}
+.js-slider_item {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  padding: 1rem 3rem;
+  opacity: 0;
+  visibility: hidden;
+  transform-origin: right center;
+  transform: translate3d(0%, 0%, 0) rotateY(30deg) scaleX(0.95);
+  transition: all 1s ease,transform 1s cubic-bezier(0.43, 0.28, 0.51, 1);
+}
+#s-1:checked ~ .js-slider .js-slider_item.img-1,
+#s-2:checked ~ .js-slider .js-slider_item.img-2,
+#s-3:checked ~ .js-slider .js-slider_item.img-3 {
+  opacity: 1;
+  visibility: visible;
+  transform-origin: left center;
+  transform: translate3d(0, 0, 0) rotateY(0deg) scaleX(1);
+}
+.js-slider_img {
+  width: 100%;
+  height: 60%;
+  position: relative;
+  overflow: hidden;
+}
+.c-img-w-full {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: auto;
+  transform: translate3d(-50%, -50%, 0);
+}
+.c-img-h-full {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: auto;
+  height: 100%;
+  transform: translate3d(-50%, -50%, 0);
+}
+figcaption {
+  display: block;
+}
+.wo-h3 {
+  margin-top: 6rem;
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid rgb(114 114 114);
+}
+.c-label {
+  display: inline-block;
+  color: #eee;
+  background-color: rgb(114 114 114);
+  line-height: 1;
+  padding: 0.5em 0.9em;
+  margin-right: 0.5em;
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+.view-sm {
+  display: none;
+}
+.js-slider_nav {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  transform: translate3d(0, -50%, 0);
+}
+.js-slider_nav_item.prev {
+  left: 0;
+}
+.js-slider_nav_item.next {
+  right: 0;
+  transform: rotateY(180deg);
+}
+.js-slider_nav_item {
+  position: absolute;
+  display: none;
+  width: 4rem;
+  height: 4rem;
+  border: 1px solid rgb(114 114 114);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 1s all cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.js-slider_nav_item:before {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 1rem;
+  top: 55%;
+  width: 1rem;
+  height: 1px;
+  background-color: rgb(114 114 114);
+  transform-origin: left bottom;
+  transform: translate3d(0, -50%, 0) rotate(-45deg);
+  transition: 1s all cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.js-slider_nav_item:hover {
+   transform: translate3d(-30%, 0, 0);
+}
+.js-slider_nav_item.next:hover {
+   transform: rotateY(180deg) translate3d(-30%, 0, 0);
+}
+.js-slider_nav_item:hover:before {
+  transform: translate3d(0, -50%, 0) rotate(-30deg);
+}
+.js-slider_nav_item:after {
+  content: "";
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  width: 2rem;
+  height: 1px;
+  background-color: rgb(114 114 114);
+  transform: translate3d(-50%, -50%, 0);
+}
+#s-1:checked ~ .js-slider .js-slider_nav .s-nav-1,
+#s-2:checked ~ .js-slider .js-slider_nav .s-nav-2,
+#s-3:checked ~ .js-slider .js-slider_nav .s-nav-3 {
+  display: block;
+}
+.js-slider_indicator {
+  position: absolute;
+  left: 0;
+  top: 63%;
+  width: 100%;
+  text-align: center;
+}
+.js-slider-indi {
+  position: relative;
+  display: inline-block;
+  padding: 2rem;
+  cursor: pointer;
+}
+.js-slider-indi:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 1rem;
+  background: rgb(114 114 114);
+  transform: translate3d(-50%, -50%, 0);
+}
+.js-slider-indi:hover:after {
+  transform: translate3d(-50%, -50%, 0) scale(1.5);
+  transition: 1s all cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+#s-1:checked ~ .js-slider .js-slider_indicator .indi-1:after,
+#s-2:checked ~ .js-slider .js-slider_indicator .indi-2:after,
+#s-3:checked ~ .js-slider .js-slider_indicator .indi-3:after {
+  transform: translate3d(-50%, -50%, 0) scale(2.5);
+}
+        
+    </style>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    {# <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"> #}
+    <section class="w3l-contact" id="contact">
+    <div class="contact-infubd py-5">
+    <div class="container py-lg-3">
+      <div class="contact-grids row">
     <div class="container">
-        <div class="caroulix" id="example-caroulix" data-ax="caroulix" data-ax-caroulix-autoplay-enabled="true" data-caroulix-indicators-enabled="true">
+        <input type="radio" id="s-1" name="slider-control" checked="checked">
+<input type="radio" id="s-2" name="slider-control">
+<input type="radio" id="s-3" name="slider-control">
+<div class="js-slider">
+    {% for image in service.images %}
+            <figure class="js-slider_item img-1">
+                <div class="js-slider_img">
+                <img class="c-img-w-full" src="{{asset('uploads/'~ image.name) }}" alt="{{ service.title}}">
+                </div>
+                <figcaption class="wo-caption">
+                <h3 class="wo-h3">
+                    <div class="c-label">{{service.category.name }}</div>
+                    <br class="view-sm mb-s">{{ service.title}}</h3>
+                <ul class="wo-credit">
+                <div class="card-content">
+                    <!-- <p> Activité:{{service.category.name }}</p> -->
+                    {# <h6 class="mt-4">Contenu :</h6> #}
+                    <p>{{service.content|raw}}</p>
+
+                </ul>
+                </figcaption>
+            </figure>
+            {% endfor %}
+
+  <div class="js-slider_nav">
+    <label class="js-slider_nav_item s-nav-1 prev" for="s-3"></label>
+    <label class="js-slider_nav_item s-nav-1 next" for="s-2"></label>
+    <label class="js-slider_nav_item s-nav-2 prev" for="s-1"></label>
+    <label class="js-slider_nav_item s-nav-2 next" for="s-3"></label>
+    <label class="js-slider_nav_item s-nav-3 prev" for="s-2"></label>
+    <label class="js-slider_nav_item s-nav-3 next" for="s-1"></label>
+  </div>
+  <div class="js-slider_indicator">
+    <div class="js-slider-indi indi-1"></div>
+    <div class="js-slider-indi indi-2"></div>
+    <div class="js-slider-indi indi-3"></div>
+    
+  </div>
+</div>
+    
+        {# <div class="caroulix" id="example-caroulix" data-ax="caroulix" data-ax-caroulix-autoplay-enabled="true" data-caroulix-indicators-enabled="true">
             <div class="caroulix-arrow caroulix-prev">
               <i class="fas fa-chevron-left"></i>
             </div>
@@ -20,18 +354,18 @@
                 <img src="{{asset('uploads/'~ image.name) }}" alt="{{ service.title}}" width="300x400"/>
             </div>
             {% endfor %}
-        </div>
+        </div> #}
 
-        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        {# {% if is_granted('IS_AUTHENTICATED_FULLY') %}
             {% if (service.user.id == app.user.id) %}
                 <a href="{{ path('service_edit', {'id': service.id}) }}" class="btn btn-danger mt-2">Éditer</a>
             {% endif %}
-        {% endif %}
+        {% endif %} #}
 
-        <div class="grix xs2 sm3 gutter-0 card mt-2">
+        {# <div class="grix xs2 sm3 gutter-0 card mt-2">
             <div class="primary flex vcenter fx-center"></div>
             <div class="col-sm2">
-                {# inserer carousel puisqu' il y ' a plusieurs images uploader#}
+                <!--inserer carousel puisqu' il y ' a plusieurs images uploader-->
                 <div class="card-header">{{service.title}}</div>
                 <div class="card-content">
                     <!-- <p> Activité:{{service.category.name }}</p> -->
@@ -45,7 +379,7 @@
                                 </svg> Envoyer un message
                             </a>
                         </div>
-                        {# Fonction pour afficher boutton contact et masquer #}
+                        <!-- Fonction pour afficher boutton contact et masquer -->
                         <script>
                             $(document).ready(function(){
                                 $('#voir').click(function() {
@@ -70,7 +404,7 @@
                             </a>
                         </div>
 
-                         {# Fonction pour afficher boutton contact et masquer #}
+                         <!-- Fonction pour afficher boutton contact et masquer -->
                          <script>
                             $(document).ready(function(){
                                 $('#voir').click(function() {
@@ -89,10 +423,178 @@
                 </div>
                 
             </div>
-        </div>
+        </div> #}
             
         {# Commentaire #}
-        {% if is_granted("ROLE_USER") %}
+        
+        <div id="ajout-commentaire"></div>
+            <div class="container bootdey" >
+            <div class="col-md-12 bootstrap snippets" >
+            <div class="panel">
+            <div class="panel-body" style="border : black"  >
+                                <div class="row"><div class="col-12">
+
+                    {% if is_granted("ROLE_USER") %}
+                        
+                        <div class="btn btn-style btn-secondary" id="voir">
+                            Voir Contact
+                        </div>
+
+                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            {% if (service.user.id == app.user.id) %}
+                <a href="{{ path('service_edit', {'id': service.id}) }}" class="btn btn-style btn-secondary ">Éditer</a>
+            {% endif %}
+
+                            <a href="{{ path("app_message") }}" class="btn btn-style btn-secondary ">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
+                                    <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383-4.758 2.855L15 11.114v-5.73zm-.034 6.878L9.271 8.82 8 9.583 6.728 8.82l-5.694 3.44A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.739zM1 11.114l4.758-2.876L1 5.383v5.73z"/>
+                                </svg> Envoyer un message
+                            </a>
+                            
+                        
+                        <!-- Fonction pour afficher boutton contact et masquer -->
+                        <script>
+                            $(document).ready(function(){
+                                $('#voir').click(function() {
+                                  $('.num').toggle("slide");
+                                });
+                            });
+                        </script>
+                        
+                        <div class="num" style="display: none;">
+                            +212 {{service.user.telephone}}   
+                        </div>
+
+
+                    {% else  %}
+                        
+                        <div class="btn btn-style btn-secondary" id="voir">
+                            Voir Contact
+                        </div>
+
+                            <a href="{{ path("app_login") }}" class="btn btn-style btn-secondary ">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
+                                    <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383-4.758 2.855L15 11.114v-5.73zm-.034 6.878L9.271 8.82 8 9.583 6.728 8.82l-5.694 3.44A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.739zM1 11.114l4.758-2.876L1 5.383v5.73z"/>
+                                </svg> Envoyer un message
+                            </a>
+                        
+
+                         <!-- Fonction pour afficher boutton contact et masquer -->
+                         <script>
+                            $(document).ready(function(){
+                                $('#voir').click(function() {
+                                  $('.num').toggle("slide");
+                                });
+                            });
+                        </script>
+                        
+                        <div class="num" style="display: none;">
+                           +212 {{service.user.telephone}}   
+                        </div>
+                       
+                    {% endif %}
+                    </div></div>
+                </div>
+                    
+        {% endif %}
+                    {% if is_granted("ROLE_USER") %}
+                    {{ form_start(commentForm) }}
+                                {{ form_widget(commentForm.content, {'attr': {'class': 'form-control' }}) }}
+                                <div class="mar-top clearfix">
+                {{ form_widget(commentForm.envoyer, {'attr': {'class': 'btn btn-style btn-secondary pull-right' }}) }}
+                {{ form_end(commentForm) }}
+                </div>    
+                            
+                                {# {{form(commentForm.content)}} #}
+
+                    {% else %}           
+                                {{form_row(commentForm.content)}}
+                            
+                            <div class="mar-top clearfix">
+                <a href="{{ path("app_login") }}" class="btn btn-style btn-secondary pull-right">
+                                <i class="fa fa-pencil fa-fw"></i> Envoyer
+                            </a>
+                </div>              
+                    {% endif %}  
+                
+            </div>
+            <h1>Commentaires</h1>
+            <hr>
+            </div>
+            <div class="panel">
+                <div class="panel-body">
+                
+                {% for comment in service.comments %}
+                {% if comment.parent == null %}
+                <!-- Newsfeed Content -->
+                <!--===================================================-->             
+                {# <h3>Commentaires {{loop.index}}</h3> #}
+                    {# <p><span class="text-muted"> {{comment.createdAt|ago(locale='fr')}} - {{comment.user.name}} {{comment.user.firstname}} </span></p>
+                    <div>{{comment.content}}</div><br>
+                    <p><a href="#ajout-commentaire" data-reponse data-id="{{comment.id}}" class="btn shadow-1 rounded-1 small primary uppercase mt-2">Répondre</a></p>
+                    <div class="col-md-5"> #}
+                    {# {% for reponse in comment.reponses %}
+                        <p><span class="text-muted"> {{reponse.createdAt|ago(locale='fr')}} - {{comment.user.name}} {{comment.user.firstname}} </span></p>
+                        <div>{{reponse.content}}</div><br>
+                    {% endfor %} #}
+                </div>         
+                <div class="media-block">
+                <a class="media-left" href="#"><img class="img-circle img-sm" alt="Profile Picture" src="https://bootdey.com/img/Content/avatar/avatar1.png"></a>
+                <div class="media-body">
+                    <div class="mar-btm">
+                    <h6 class="ml-2">{{comment.user.name}} {{comment.user.firstname}}</h6>
+                    <p class="text-muted text-sm ml-2"> - {{comment.createdAt|ago(locale='fr')}}</p>
+                    </div>
+                    <p>{{comment.content}}</p>
+                    <div class="pad-ver">
+                    <div class="btn-group">
+                        <a class="btn btn-sm btn-default btn-hover-success" href="#"><i class="fa fa-thumbs-up"></i></a>
+                        <a class="btn btn-sm btn-default btn-hover-danger" href="#"><i class="fa fa-thumbs-down"></i></a>
+                    </div>
+                    <a class="btn btn-sm btn-default btn-hover-primary" href="#ajout-commentaire" data-reponse data-id="{{comment.id}}" >Répondre</a>
+                    </div>
+                    <hr>
+
+                
+                    <!-- Comments -->
+                    <div>
+                    {% for reponse in comment.reponses %}
+                    <div class="media-block">
+                        <a class="media-left" href="#"><img class="img-circle img-sm" alt="Profile Picture" src="https://bootdey.com/img/Content/avatar/avatar2.png"></a>
+                        <div class="media-body">
+                        <div class="mar-btm">
+                            <h6 class="ml-2">{{reponse.user.name}} {{reponse.user.firstname}} </h6>
+                            <p class="text-muted text-sm ml-2"> - {{reponse.createdAt|ago(locale='fr')}}</p>
+                        </div>
+                        <p>{{reponse.content}}</p>
+                        <div class="pad-ver">
+                            <div class="btn-group">
+                            <a class="btn btn-sm btn-default btn-hover-success active" href="#"><i class="fa fa-thumbs-up"></i> You Like it</a>
+                            <a class="btn btn-sm btn-default btn-hover-danger" href="#"><i class="fa fa-thumbs-down"></i></a>
+                            </div>
+                            {# <a class="btn btn-sm btn-default btn-hover-primary" href="#">Comment</a> #}
+                        </div>
+                        <hr>
+                        </div>
+                    </div>
+
+                    {% endfor %}
+                    </div>
+                    
+
+                </div>
+                </div>
+                <!--===================================================-->
+                <!-- End Newsfeed Content -->
+                {% endif %}
+                {% endfor %}
+
+
+            </div>
+            </div>
+            </div>
+            </div>
+        {# {% if is_granted("ROLE_USER") %}
         
         <div class="grix xs2 sm3 gutter-0 card">
             <div class="col-xs2 col-sm3" id="ajout-commentaire">
@@ -110,9 +612,9 @@
                 </a>
             </div>
                 
-        {% endif %}   
+        {% endif %}    #}
             
-            <div class="col-xs2 col-sm3">
+            {# <div class="col-xs2 col-sm3">
                 <h2>Liste des commentaires</h2><br>
                 {% for comment in service.comments %}
                     {% if comment.parent == null %}
@@ -128,9 +630,23 @@
                     </div>
                     {% endif %}
                 {% endfor %}
-            </div>
+            </div> #}
         </div>
     </div>
+    </div>
+    </div>
+    </div>
+    </section>
+    <script>
+        window.onload = () => {
+        document.querySelectorAll("[data-reponse]").forEach(element => {
+            element.addEventListener("click", function(){
+                document.querySelector("#comments_parentid").value = this.dataset.id;
+            });
+        });
+    }
+
+    </script>
 {% endblock %}
 
 {# {% block javascripts %}
