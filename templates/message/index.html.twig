@@ -3,7 +3,71 @@
 {% block title %} Messagerie{% endblock %}
 
 {% block body %}
-    <section class="container">
+  <!-- about breadcrumb -->
+  <section class="w3l-about-breadcrumb text-left">
+    <div class="breadcrumb-bg breadcrumb-bg-about py-sm-5 py-4">
+      <div class="container py-2">
+        <h2 class="title">Messagerie</h2>
+        <ul class="breadcrumbs-custom-path mt-2">
+          <li><a href="/">Acceuil</a></li>
+          <li ><a href="/message"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span> Messagerie</a></li>
+          {% block breadcrumbmessage %}
+          <li class="active"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span> accueil </li>
+          {% endblock %}
+        </ul>
+      </div>
+    </div>
+  </section>
+  <!-- //about breadcrumb -->
+<!-- contact-form -->
+<section class="w3l-contact" id="contact">
+  <div class="contact-infubd py-5">
+    <div class="container py-lg-3">
+      <div class="contact-grids row">
+        <div class="col-lg-3 contact-left">
+          <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+            <div class="offcanvas-header">
+                <h2 class="offcanvas-title mb-4" id="offcanvasExampleLabel">Mes dossiers </h2>
+            </div>
+            <div class="offcanvas-body">
+                {% block sidebarmessage %}
+                <div class="list-group">
+                    <a href="{{ path('app_message') }}" class="list-group-item list-group-item active">
+                        Acceuil</a>
+                </div>
+
+                <div class="list-group">
+                    <a href="{{ path('app_received') }}" class="list-group-item list-group-item ">
+                        Boite de récepetion </a>
+                </div>
+
+                <div class="list-group">
+                    <a href="{{ path('app_messageSent') }}" class="list-group-item list-group-item ">
+                        Messages envoyés</a>
+                </div>
+                {% endblock %}
+
+            </div>
+        </div>
+        </div>
+        <div class="col-lg-9 mt-lg-0 mt-5 contact-right">
+        {% block bodymessage %}
+          <h1>Messagerie</h1>
+                <u><h6 class="mt-3 mb-3">Boite de récepetion </h6></u>
+                <p>Messages récus: {{ app.user.received|length}} </p>
+                <p>Messages envoyés: {{ app.user.sent|length}} </p>
+                <a class="btn btn-style btn-secondary mt-3" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+                    Menu principal
+                </a>
+                <a href="{{ path('app_send') }}" class="btn btn-style btn-secondary mt-3"> Envoyer un message</a>
+        {% endblock %}
+        </div>
+
+      </div>
+    </div>
+</section>
+<!-- /contact-form -->
+    {# <section class="container">
         <div class="row">
             <div class="col">
                 <h1>Messagerie</h1>
@@ -42,6 +106,6 @@
 
 
         </div>
-    </div>
+    </div> #}
 
 {% endblock %}

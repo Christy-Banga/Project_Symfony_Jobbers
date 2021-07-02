@@ -21,9 +21,9 @@ class MessageType extends AbstractType
 
             ->add('message',TextareaType::class,['label'=>'Message :'])
 
-            ->add('recepient',EntityType::class,['class'=>User::class,'label'=>'À :'])
+            ->add('recepient',EntityType::class,['class'=>User::class,'label'=>'À :','attr'=>['class'=>'selectpicker form-control']])
 
-            ->add('Envoyer',SubmitType::class,['attr'=>['class'=>'btn btn-primary:']]);
+            ->add('Envoyer',SubmitType::class,['attr'=>['class'=>'btn btn-style btn-secondary mt-3 mb-3']]);
 
 
 
