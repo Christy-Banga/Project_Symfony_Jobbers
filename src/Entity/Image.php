@@ -18,9 +18,10 @@ class Image
     private $id;
 
     /**
+     * @ORM\JoinColumn(nullable=true)
      * @ORM\Column(type="string", length=255)
      */
-    public ?string $name;
+    public ?string $name=null;
 
     /**
      * @ORM\ManyToOne(targetEntity=Service::class, inversedBy="images")
