@@ -35,43 +35,87 @@
                             </div>
                         {% endfor %}
 
+
+                        <!--  Work gallery section -->
+                        <section class="grids-1 py-5">
+                            <div class="grids py-lg-5 py-md-4">
+                                <div class="container">
+                                    <p>Voir vos informations</p>
+                                    <h6 class="hny-title mb-5">Annonce de {{ app.user.firstname }} {{ app.user.name }}</h6>
+                                    <div class="row">
+                                        {% for service in app.user.services %}
+                                            <div class="col-lg-4 col-md-4 col-6 mt-4">
+                                                <div class="column">
+                                                    {% for image in service.images %}
+                                                    <img src="{{ asset('uploads/' ~ image.name) }}" alt="{{ service.title }}" class="img-fluid">
+                                                    {% endfor %}
+                                                    {#<a href="blog-single.html"><img src="{{asset('assets/images/g1.jpg')}}" alt="" class="img-fluid"></a>  #}
+
+                                                    <div class="info">
+                                                        <h3 ><a style="color : gray" href="#">{{ service.title }}</a>&nbsp;&nbsp;<a href="{{ path('service_edit', {'id': service.id}) }}"><img src="https://img.icons8.com/office/30/000000/edit.png"/></a> </h3>
+                                                        <p>{{ service.createdAt ? service.createdAt|date('Y-m-d H:i:s') : '' }} </p>
+                                                        <div class="dst-btm">
+                                                            <h6 class="">{{ service.slug }} </h6>
+                                                            <span>{{ service.content }}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% else %}
+                                            <h1>Aucune annonce</h1>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
                         <div class="col-lg-6 contact-right">
                             <div class="partners">
 
-                                <div class="cont-details">
-                                    <h5>Voir vos informations</h5>
-                                    <p class="mt-3 mb-4">informations de {{ app.user.firstname }} {{ app.user.name }}</p>
-                                </div>
+                        <div class="cont-details">
+                            <h6>Vos informations</h6>
+                            <p class="mt-3 mb-4">informations de {{ app.user.firstname }} {{ app.user.name }}</p>
+                        </div>
 
-                                <div class="hours">
-                                    <h6 class="mt-4">Email :</h6>
-                                    <p>{{ app.user.email }}</p>
-                                    <h6 class="mt-4">Nom :</h6>
-                                    <p> {{ app.user.name }}</p>
-                                    <h6 class="mt-4">Prénoms :</h6>
-                                    <p class="margin-top">{{ app.user.firstname }}</p>
-                                    <h6 class="mt-4">Ville :</h6>
-                                    <p class="margin-top">{{ app.user.ville }}</p>
-                                    <h6 class="mt-4">Commune :</h6>
-                                    <p class="margin-top">{{ app.user.commune }}</p>
-                                    <h6 class="mt-4">Telephone :</h6>
-                                    <p class="margin-top">{{ app.user.Telephone }}</p>
+                        <div class="hours">
+                            <h6 class="mt-4">Email :<p>{{ app.user.email }}</p></h6>
+                            {#<p>{{ app.user.email }}</p>  #}
+                            <h6 class="mt-4">Nom :<p> {{ app.user.name }}</p></h6>
+                            {#<p> {{ app.user.name }}</p>  #}
+                            <h6 class="mt-4">Prénoms :<p class="margin-top">|{{ app.user.firstname }}</p></h6>
+                             {#<p> <p class="margin-top">{{ app.user.firstname }}</p></p>  #}
+
+                            <h6 class="mt-4">Ville :<p class="margin-top">{{ app.user.ville }}</p></h6>
+                            {#<p>  <p class="margin-top">{{ app.user.ville }}</p></p>  #}
+                            <h6 class="mt-4">Commune :<p class="margin-top">{{ app.user.commune }}</p></h6>
+                            {# <p class="margin-top">{{ app.user.commune }}</p> #}
+                            <h6 class="mt-4">Telephone :<p class="margin-top">{{ app.user.Telephone }}</p></h6>
+                             {#<p class="margin-top">{{ app.user.Telephone }}</p> #}
+                        </div>
+                            </div>
+                        </div>
 
 
-                                    <div class="col-xs4">
-                                        <h1>Annonces de {{ app.user.firstname }} {{ app.user.name }} ({{ app.user.services|length }})</h1>
-                                    </div>
-                                    {% for service in app.user.services %}
-                                        <div class="col-xs1">Titre :</div>
-                                        <div class="col-xs3">{{ service.title }}</div>
-                                        <div class="col-xs1">Description :</div>
-                                        <div class="col-xs3">{{ service.content }}</div>
-                                        <div class="col-xs4">
-                                            {% for image in service.images %}
-                                                <img src="{{ asset('uploads/' ~ image.name) }}" alt="{{ service.title }}">
-                                            {% endfor %}
-                                        </div>
-                                    {% endfor %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        {#<p>{{ app.user.email }}</p>  #}
+
+
 
 
                                 </div>
