@@ -56,11 +56,18 @@
                     <div href="#" class="card_title p-lg-4d-block">
                     <div class="row align-items-center">
                         <div class="col-sm-5 subject-img">
-                        <img src="{{asset('assets/images/g1.jpg')}}" class="img-fluid" alt="">
+
+                            <a href="{{ path('service-read',{slug: service.slug}) }}">
+                                <img src="{{asset('uploads/' ~ service.images[0].name)}}" class="img-fluid" alt="{{ service.title }}">
+                            </a>
+                            {# <img src="{{asset('assets/images/g1.jpg')}}" class="img-fluid" alt="">  #}
+
+
                         </div>
                         <div class="col-sm-7 subject-content mt-sm-0 mt-4">
                         <h4>{{service.title}}</h4>
-                        <p>xxxxxx</p>
+                        <p>{{ service.user.name }} {{service.user.firstname  }}</p>
+                            <p class="text-muted text-sm">{{ service.created_at|ago(locale='fr') }}</p>
                         <div class="dst-btm">
                             <h6 class=""> {{service.category}} </h6>
                             <a href="{{ path('service-read',{slug: service.slug}) }}"><span class="fa fa-search mr-3"aria-hidden="true">Voir plus</span></a>
